@@ -1,10 +1,60 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode, type CSSProperties } from "react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
+/* ---------- Scroll reveal ---------- */
+function Reveal({
+  children,
+  as: Tag = "div",
+  delay = 0,
+  className = "",
+}: {
+  children: ReactNode;
+  as?: keyof React.JSX.IntrinsicElements;
+  delay?: number;
+  className?: string;
+}) {
+  const ref = useRef<HTMLElement | null>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setVisible(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            setVisible(true);
+            io.disconnect();
+            break;
+          }
+        }
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  const style: CSSProperties = { transitionDelay: `${delay}ms` };
+  const AnyTag = Tag as any;
+  return (
+    <AnyTag
+      ref={ref as any}
+      style={style}
+      className={`reveal ${visible ? "reveal-in" : ""} ${className}`}
+    >
+      {children}
+    </AnyTag>
+  );
+}
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
