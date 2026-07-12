@@ -324,15 +324,19 @@ function TrustStrip() {
     "Oracle Cloud — Inteligencia Artificial",
     "Entrega de código fuente y control de versiones",
   ];
+  const loop = [...items, ...items];
   return (
-    <section aria-label="Confianza" className="border-y border-white/5 bg-surface/40">
-      <div className="mx-auto max-w-7xl px-5 py-6">
-        <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs text-muted-foreground sm:text-sm">
-          {items.map((i, idx) => (
-            <li key={i} className="flex items-center gap-2">
+    <section aria-label="Confianza" className="relative border-y border-white/5 bg-surface/40">
+      <div
+        className="group relative overflow-hidden py-5"
+        style={{ maskImage: "linear-gradient(90deg, transparent, black 10%, black 90%, transparent)", WebkitMaskImage: "linear-gradient(90deg, transparent, black 10%, black 90%, transparent)" }}
+      >
+        <ul className="flex w-max items-center gap-10 whitespace-nowrap text-xs text-muted-foreground sm:text-sm animate-marquee group-hover:[animation-play-state:paused]">
+          {loop.map((i, idx) => (
+            <li key={`${i}-${idx}`} className="flex items-center gap-2">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" className="text-brand"><path d="M20 6L9 17l-5-5"/></svg>
               <span>{i}</span>
-              {idx < items.length - 1 && <span aria-hidden className="mx-3 hidden h-1 w-1 rounded-full bg-white/20 sm:inline-block" />}
+              <span aria-hidden className="ml-10 h-1 w-1 rounded-full bg-white/20" />
             </li>
           ))}
         </ul>
@@ -340,6 +344,7 @@ function TrustStrip() {
     </section>
   );
 }
+
 
 function Pains() {
   const items = [
