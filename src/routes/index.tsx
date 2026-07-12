@@ -555,17 +555,23 @@ function Methodology() {
           </h2>
         </div>
         <ol className="mt-10 grid gap-4 md:grid-cols-3">
-          {steps.map((s) => (
-            <li key={s.n} className="card-elevated p-6">
+          {steps.map((s, i) => (
+            <Reveal
+              key={s.n}
+              as="li"
+              delay={i * 140}
+              className="card-elevated p-6 tilt-hover tilt-hover-active"
+            >
               <div className="flex items-baseline justify-between">
-                <span className="font-display text-3xl font-semibold text-gradient">{s.n}</span>
-                <span className="h-px flex-1 mx-4 bg-white/10" />
+                <span className="font-display text-3xl font-semibold text-gradient-animated">{s.n}</span>
+                <span className="h-px flex-1 mx-4 bg-gradient-to-r from-brand/50 via-white/10 to-transparent" />
               </div>
               <h3 className="mt-4 font-display text-lg font-semibold">{s.t}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{s.d}</p>
-            </li>
+            </Reveal>
           ))}
         </ol>
+
       </div>
     </section>
   );
