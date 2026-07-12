@@ -362,14 +362,19 @@ function Pains() {
         </h2>
       </div>
       <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {items.map((i) => (
-          <div key={i.t} className="card-elevated p-5 tilt-hover tilt-hover-active">
+        {items.map((i, idx) => (
+          <Reveal
+            key={i.t}
+            delay={idx * 90}
+            className="card-elevated p-5 tilt-hover tilt-hover-active"
+          >
             <div className="mb-3 grid h-9 w-9 place-items-center rounded-lg bg-brand-gradient/20 text-brand">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
             </div>
             <h3 className="font-display text-base font-semibold">{i.t}</h3>
             <p className="mt-1.5 text-sm text-muted-foreground">{i.d}</p>
-          </div>
+          </Reveal>
+
         ))}
       </div>
     </section>
