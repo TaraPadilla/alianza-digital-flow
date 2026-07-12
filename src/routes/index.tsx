@@ -85,8 +85,9 @@ function PrimaryCTA({ children, href = waUrl(), className = "" }: { children: Re
       href={href}
       target={href.startsWith("http") ? "_blank" : undefined}
       rel="noreferrer noopener"
-      className={`inline-flex items-center gap-2 rounded-xl btn-primary btn-primary-hover px-5 py-3 text-sm font-semibold ${className}`}
+      className={`magnetic magnetic-shine inline-flex items-center gap-2 rounded-xl btn-primary btn-primary-hover px-5 py-3 text-sm font-semibold ${className}`}
     >
+
       {children}
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M5 12h14M13 5l7 7-7 7"/>
