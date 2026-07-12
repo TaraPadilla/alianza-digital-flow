@@ -1,10 +1,60 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode, type CSSProperties } from "react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
+/* ---------- Scroll reveal ---------- */
+function Reveal({
+  children,
+  as: Tag = "div",
+  delay = 0,
+  className = "",
+}: {
+  children: ReactNode;
+  as?: keyof React.JSX.IntrinsicElements;
+  delay?: number;
+  className?: string;
+}) {
+  const ref = useRef<HTMLElement | null>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setVisible(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            setVisible(true);
+            io.disconnect();
+            break;
+          }
+        }
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  const style: CSSProperties = { transitionDelay: `${delay}ms` };
+  const AnyTag = Tag as any;
+  return (
+    <AnyTag
+      ref={ref as any}
+      style={style}
+      className={`reveal ${visible ? "reveal-in" : ""} ${className}`}
+    >
+      {children}
+    </AnyTag>
+  );
+}
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -35,8 +85,9 @@ function PrimaryCTA({ children, href = waUrl(), className = "" }: { children: Re
       href={href}
       target={href.startsWith("http") ? "_blank" : undefined}
       rel="noreferrer noopener"
-      className={`inline-flex items-center gap-2 rounded-xl btn-primary btn-primary-hover px-5 py-3 text-sm font-semibold ${className}`}
+      className={`magnetic magnetic-shine inline-flex items-center gap-2 rounded-xl btn-primary btn-primary-hover px-5 py-3 text-sm font-semibold ${className}`}
     >
+
       {children}
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M5 12h14M13 5l7 7-7 7"/>
@@ -217,11 +268,18 @@ function HeroVisual() {
 function Hero() {
   return (
     <section id="top" className="relative overflow-hidden bg-hero">
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 pb-20 pt-16 lg:grid-cols-[1.05fr_1fr] lg:pt-24">
+      {/* Aurora blobs */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-0">
+        <div className="absolute -left-32 top-10 h-[420px] w-[420px] rounded-full bg-brand/25 blur-3xl animate-aurora" />
+        <div className="absolute -right-24 top-40 h-[380px] w-[380px] rounded-full bg-accent/25 blur-3xl animate-aurora" style={{ animationDelay: "-6s" }} />
+        <div className="absolute left-1/3 -bottom-32 h-[360px] w-[360px] rounded-full bg-brand-2/20 blur-3xl animate-aurora" style={{ animationDelay: "-12s" }} />
+      </div>
+
+      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 pb-20 pt-16 lg:grid-cols-[1.05fr_1fr] lg:pt-24">
         <div className="animate-fade-up">
           <SectionEyebrow>Software empresarial a medida</SectionEyebrow>
           <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
-            Tecnología que se <span className="text-gradient">adapta a tu negocio</span>, no al contrario.
+            Tecnología que se <span className="text-gradient-animated">adapta a tu negocio</span>, no al contrario.
           </h1>
           <p className="mt-5 max-w-xl text-base text-muted-foreground sm:text-lg">
             Diseñamos plataformas empresariales, automatizaciones e integraciones que
@@ -238,8 +296,12 @@ function Hero() {
               { k: "+15", l: "años en software empresarial" },
               { k: "1:1", l: "acompañamiento directo" },
               { k: "LATAM", l: "atención remota" },
-            ].map((s) => (
-              <div key={s.l} className="rounded-xl glass p-3">
+            ].map((s, i) => (
+              <div
+                key={s.l}
+                className="rounded-xl glass p-3 animate-fade-up transition hover:-translate-y-0.5 hover:border-white/20"
+                style={{ animationDelay: `${200 + i * 120}ms` }}
+              >
                 <dt className="font-display text-2xl font-semibold text-gradient">{s.k}</dt>
                 <dd className="mt-1 text-[11px] leading-tight text-muted-foreground">{s.l}</dd>
               </div>
@@ -254,6 +316,7 @@ function Hero() {
   );
 }
 
+
 function TrustStrip() {
   const items = [
     "Proveedora tecnológica autorizada de Meta (WhatsApp)",
@@ -261,15 +324,19 @@ function TrustStrip() {
     "Oracle Cloud — Inteligencia Artificial",
     "Entrega de código fuente y control de versiones",
   ];
+  const loop = [...items, ...items];
   return (
-    <section aria-label="Confianza" className="border-y border-white/5 bg-surface/40">
-      <div className="mx-auto max-w-7xl px-5 py-6">
-        <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs text-muted-foreground sm:text-sm">
-          {items.map((i, idx) => (
-            <li key={i} className="flex items-center gap-2">
+    <section aria-label="Confianza" className="relative border-y border-white/5 bg-surface/40">
+      <div
+        className="group relative overflow-hidden py-5"
+        style={{ maskImage: "linear-gradient(90deg, transparent, black 10%, black 90%, transparent)", WebkitMaskImage: "linear-gradient(90deg, transparent, black 10%, black 90%, transparent)" }}
+      >
+        <ul className="flex w-max items-center gap-10 whitespace-nowrap text-xs text-muted-foreground sm:text-sm animate-marquee group-hover:[animation-play-state:paused]">
+          {loop.map((i, idx) => (
+            <li key={`${i}-${idx}`} className="flex items-center gap-2">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" className="text-brand"><path d="M20 6L9 17l-5-5"/></svg>
               <span>{i}</span>
-              {idx < items.length - 1 && <span aria-hidden className="mx-3 hidden h-1 w-1 rounded-full bg-white/20 sm:inline-block" />}
+              <span aria-hidden className="ml-10 h-1 w-1 rounded-full bg-white/20" />
             </li>
           ))}
         </ul>
@@ -277,6 +344,7 @@ function TrustStrip() {
     </section>
   );
 }
+
 
 function Pains() {
   const items = [
@@ -294,14 +362,19 @@ function Pains() {
         </h2>
       </div>
       <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {items.map((i) => (
-          <div key={i.t} className="card-elevated p-5 transition hover:-translate-y-1">
+        {items.map((i, idx) => (
+          <Reveal
+            key={i.t}
+            delay={idx * 90}
+            className="card-elevated p-5 tilt-hover tilt-hover-active"
+          >
             <div className="mb-3 grid h-9 w-9 place-items-center rounded-lg bg-brand-gradient/20 text-brand">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
             </div>
             <h3 className="font-display text-base font-semibold">{i.t}</h3>
             <p className="mt-1.5 text-sm text-muted-foreground">{i.d}</p>
-          </div>
+          </Reveal>
+
         ))}
       </div>
     </section>
@@ -363,8 +436,13 @@ function Services() {
         </div>
 
         <div className="mt-10 grid gap-4 lg:grid-cols-4 lg:grid-rows-2">
-          {services.map((s) => (
-            <article key={s.t} className={`card-elevated p-6 transition hover:border-white/15 ${s.span ?? ""}`}>
+          {services.map((s, i) => (
+            <Reveal
+              key={s.t}
+              as="article"
+              delay={i * 90}
+              className={`card-elevated p-6 tilt-hover tilt-hover-active hover:border-white/15 ${s.span ?? ""}`}
+            >
               <div className="mb-4 inline-grid h-10 w-10 place-items-center rounded-xl bg-brand-gradient/25 text-brand">{s.icon}</div>
               <h3 className="font-display text-lg font-semibold">{s.t}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.d}</p>
@@ -375,9 +453,10 @@ function Services() {
                   </span>
                 ))}
               </div>
-            </article>
+            </Reveal>
           ))}
         </div>
+
       </div>
     </section>
   );
@@ -428,11 +507,17 @@ function Cases() {
       </div>
 
       <div className="mt-10 grid gap-4 md:grid-cols-2">
-        {cases.map((c) => (
-          <article key={c.t} className="card-elevated group overflow-hidden">
-            <div className="flex items-center justify-between border-b border-white/5 px-5 py-3">
+        {cases.map((c, i) => (
+          <Reveal
+            key={c.t}
+            as="article"
+            delay={i * 100}
+            className="card-elevated group overflow-hidden tilt-hover tilt-hover-active"
+          >
+            <div className="relative flex items-center justify-between border-b border-white/5 px-5 py-3">
               <span className="text-[11px] font-medium uppercase tracking-widest text-brand">{c.tag}</span>
               <span className="text-[11px] text-muted-foreground">Caso</span>
+              <span aria-hidden className="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-brand/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
             </div>
             <div className="p-6">
               <h3 className="font-display text-lg font-semibold leading-snug">{c.t}</h3>
@@ -451,9 +536,10 @@ function Cases() {
                 </div>
               </dl>
             </div>
-          </article>
+          </Reveal>
         ))}
       </div>
+
     </section>
   );
 }
@@ -474,17 +560,23 @@ function Methodology() {
           </h2>
         </div>
         <ol className="mt-10 grid gap-4 md:grid-cols-3">
-          {steps.map((s) => (
-            <li key={s.n} className="card-elevated p-6">
+          {steps.map((s, i) => (
+            <Reveal
+              key={s.n}
+              as="li"
+              delay={i * 140}
+              className="card-elevated p-6 tilt-hover tilt-hover-active"
+            >
               <div className="flex items-baseline justify-between">
-                <span className="font-display text-3xl font-semibold text-gradient">{s.n}</span>
-                <span className="h-px flex-1 mx-4 bg-white/10" />
+                <span className="font-display text-3xl font-semibold text-gradient-animated">{s.n}</span>
+                <span className="h-px flex-1 mx-4 bg-gradient-to-r from-brand/50 via-white/10 to-transparent" />
               </div>
               <h3 className="mt-4 font-display text-lg font-semibold">{s.t}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{s.d}</p>
-            </li>
+            </Reveal>
           ))}
         </ol>
+
       </div>
     </section>
   );
