@@ -431,8 +431,13 @@ function Services() {
         </div>
 
         <div className="mt-10 grid gap-4 lg:grid-cols-4 lg:grid-rows-2">
-          {services.map((s) => (
-            <article key={s.t} className={`card-elevated p-6 transition hover:border-white/15 ${s.span ?? ""}`}>
+          {services.map((s, i) => (
+            <Reveal
+              key={s.t}
+              as="article"
+              delay={i * 90}
+              className={`card-elevated p-6 tilt-hover tilt-hover-active hover:border-white/15 ${s.span ?? ""}`}
+            >
               <div className="mb-4 inline-grid h-10 w-10 place-items-center rounded-xl bg-brand-gradient/25 text-brand">{s.icon}</div>
               <h3 className="font-display text-lg font-semibold">{s.t}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.d}</p>
@@ -443,9 +448,10 @@ function Services() {
                   </span>
                 ))}
               </div>
-            </article>
+            </Reveal>
           ))}
         </div>
+
       </div>
     </section>
   );
