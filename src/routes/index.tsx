@@ -268,11 +268,18 @@ function HeroVisual() {
 function Hero() {
   return (
     <section id="top" className="relative overflow-hidden bg-hero">
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 pb-20 pt-16 lg:grid-cols-[1.05fr_1fr] lg:pt-24">
+      {/* Aurora blobs */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-0">
+        <div className="absolute -left-32 top-10 h-[420px] w-[420px] rounded-full bg-brand/25 blur-3xl animate-aurora" />
+        <div className="absolute -right-24 top-40 h-[380px] w-[380px] rounded-full bg-accent/25 blur-3xl animate-aurora" style={{ animationDelay: "-6s" }} />
+        <div className="absolute left-1/3 -bottom-32 h-[360px] w-[360px] rounded-full bg-brand-2/20 blur-3xl animate-aurora" style={{ animationDelay: "-12s" }} />
+      </div>
+
+      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 pb-20 pt-16 lg:grid-cols-[1.05fr_1fr] lg:pt-24">
         <div className="animate-fade-up">
           <SectionEyebrow>Software empresarial a medida</SectionEyebrow>
           <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
-            Tecnología que se <span className="text-gradient">adapta a tu negocio</span>, no al contrario.
+            Tecnología que se <span className="text-gradient-animated">adapta a tu negocio</span>, no al contrario.
           </h1>
           <p className="mt-5 max-w-xl text-base text-muted-foreground sm:text-lg">
             Diseñamos plataformas empresariales, automatizaciones e integraciones que
@@ -289,8 +296,12 @@ function Hero() {
               { k: "+15", l: "años en software empresarial" },
               { k: "1:1", l: "acompañamiento directo" },
               { k: "LATAM", l: "atención remota" },
-            ].map((s) => (
-              <div key={s.l} className="rounded-xl glass p-3">
+            ].map((s, i) => (
+              <div
+                key={s.l}
+                className="rounded-xl glass p-3 animate-fade-up transition hover:-translate-y-0.5 hover:border-white/20"
+                style={{ animationDelay: `${200 + i * 120}ms` }}
+              >
                 <dt className="font-display text-2xl font-semibold text-gradient">{s.k}</dt>
                 <dd className="mt-1 text-[11px] leading-tight text-muted-foreground">{s.l}</dd>
               </div>
@@ -304,6 +315,7 @@ function Hero() {
     </section>
   );
 }
+
 
 function TrustStrip() {
   const items = [
