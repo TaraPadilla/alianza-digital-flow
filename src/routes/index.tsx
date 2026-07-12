@@ -502,11 +502,17 @@ function Cases() {
       </div>
 
       <div className="mt-10 grid gap-4 md:grid-cols-2">
-        {cases.map((c) => (
-          <article key={c.t} className="card-elevated group overflow-hidden">
-            <div className="flex items-center justify-between border-b border-white/5 px-5 py-3">
+        {cases.map((c, i) => (
+          <Reveal
+            key={c.t}
+            as="article"
+            delay={i * 100}
+            className="card-elevated group overflow-hidden tilt-hover tilt-hover-active"
+          >
+            <div className="relative flex items-center justify-between border-b border-white/5 px-5 py-3">
               <span className="text-[11px] font-medium uppercase tracking-widest text-brand">{c.tag}</span>
               <span className="text-[11px] text-muted-foreground">Caso</span>
+              <span aria-hidden className="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-brand/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
             </div>
             <div className="p-6">
               <h3 className="font-display text-lg font-semibold leading-snug">{c.t}</h3>
@@ -525,9 +531,10 @@ function Cases() {
                 </div>
               </dl>
             </div>
-          </article>
+          </Reveal>
         ))}
       </div>
+
     </section>
   );
 }
