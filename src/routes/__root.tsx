@@ -96,20 +96,23 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { name: "author", content: "Alianza F1 — Tara Campos Padilla" },
       { name: "theme-color", content: "#0b1020" },
-      { property: "og:title", content: "Alianza F1 — Tecnología que se adapta a tu negocio" },
+      { property: "og:title", content: "Alianza F1— Software empresarial a medida, automatización e integraciones" },
       {
         property: "og:description",
         content:
-          "Diseñamos plataformas, automatizaciones e integraciones que eliminan tareas manuales y convierten tus procesos en sistemas eficientes.",
+          "Plataformas empresariales, automatización con IA e integraciones para pymes y empresas en Latinoamérica. Acompañamiento directo de la ingeniera Tara Campos.",
       },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Alianza F1" },
       { property: "og:locale", content: "es_LA" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Alianza F1— Software empresarial a medida, automatización e integraciones" },
+      { name: "twitter:description", content: "Plataformas empresariales, automatización con IA e integraciones para pymes y empresas en Latinoamérica. Acompañamiento directo de la ingeniera Tara Campos." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/d195952b-93bd-45fc-b104-e343ea6fd993" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/d195952b-93bd-45fc-b104-e343ea6fd993" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
