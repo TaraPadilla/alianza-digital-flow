@@ -348,35 +348,45 @@ function TrustStrip() {
 
 function Pains() {
   const items = [
-    { t: "Información dispersa", d: "Datos en hojas de cálculo, correos y carpetas que nadie encuentra a tiempo." },
-    { t: "Tareas repetitivas", d: "Personas haciendo trabajo manual que un flujo bien diseñado puede resolver." },
-    { t: "Falta de trazabilidad", d: "No sabes en qué etapa está cada proceso, cliente, contrato o pedido." },
-    { t: "Sistemas que no se comunican", d: "Cada herramienta funciona por su lado y multiplica el trabajo del equipo." },
+    "Información dispersa en Excel, chats y correos",
+    "Procesos manuales que consumen horas",
+    "Poca trazabilidad sobre la operación",
+    "Sistemas actuales que ya no acompañan el negocio",
   ];
   return (
     <section id="dolores" className="mx-auto max-w-7xl px-5 py-20">
-      <div className="max-w-2xl">
-        <SectionEyebrow>¿Qué podemos resolver?</SectionEyebrow>
-        <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
-          Si algo de esto suena familiar, podemos ayudarte.
-        </h2>
-      </div>
-      <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {items.map((i, idx) => (
-          <Reveal
-            key={i.t}
-            delay={idx * 90}
-            className="card-elevated p-5 tilt-hover tilt-hover-active"
-          >
-            <div className="mb-3 grid h-9 w-9 place-items-center rounded-lg bg-brand-gradient/20 text-brand">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
-            </div>
-            <h3 className="font-display text-base font-semibold">{i.t}</h3>
-            <p className="mt-1.5 text-sm text-muted-foreground">{i.d}</p>
-          </Reveal>
-
-        ))}
-      </div>
+      <Reveal className="card-elevated p-8 sm:p-12">
+        <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+          <div>
+            <SectionEyebrow>Cuando el negocio crece</SectionEyebrow>
+            <h2 className="mt-5 font-display text-3xl font-semibold tracking-tight sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
+              ¿Tu operación depende de archivos dispersos, tareas repetitivas o sistemas que no se comunican?
+            </h2>
+            <p className="mt-5 text-muted-foreground sm:text-lg">
+              Ese no es solamente un problema tecnológico. Es tiempo perdido, información difícil de controlar y decisiones que llegan tarde.
+            </p>
+            <a
+              href={waUrl("Hola Tara, quisiera que revisemos nuestro proceso operativo.")}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="group mt-8 inline-flex items-center gap-2 border-b border-white/20 pb-2 text-sm font-semibold text-foreground transition-colors hover:border-brand"
+            >
+              Revisemos tu proceso
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-1"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+          <ul className="flex flex-col justify-center divide-y divide-white/5">
+            {items.map((text, idx) => (
+              <li key={text} className="flex items-start gap-5 py-5">
+                <span className="mt-0.5 font-mono text-sm font-semibold text-destructive">
+                  {String(idx + 1).padStart(2, "0")}
+                </span>
+                <span className="text-base text-foreground/90">{text}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Reveal>
     </section>
   );
 }
