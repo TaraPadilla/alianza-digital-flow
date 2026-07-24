@@ -348,35 +348,45 @@ function TrustStrip() {
 
 function Pains() {
   const items = [
-    { t: "Información dispersa", d: "Datos en hojas de cálculo, correos y carpetas que nadie encuentra a tiempo." },
-    { t: "Tareas repetitivas", d: "Personas haciendo trabajo manual que un flujo bien diseñado puede resolver." },
-    { t: "Falta de trazabilidad", d: "No sabes en qué etapa está cada proceso, cliente, contrato o pedido." },
-    { t: "Sistemas que no se comunican", d: "Cada herramienta funciona por su lado y multiplica el trabajo del equipo." },
+    "Información dispersa en Excel, chats y correos",
+    "Procesos manuales que consumen horas",
+    "Poca trazabilidad sobre la operación",
+    "Sistemas actuales que ya no acompañan el negocio",
   ];
   return (
     <section id="dolores" className="mx-auto max-w-7xl px-5 py-20">
-      <div className="max-w-2xl">
-        <SectionEyebrow>¿Qué podemos resolver?</SectionEyebrow>
-        <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
-          Si algo de esto suena familiar, podemos ayudarte.
-        </h2>
-      </div>
-      <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {items.map((i, idx) => (
-          <Reveal
-            key={i.t}
-            delay={idx * 90}
-            className="card-elevated p-5 tilt-hover tilt-hover-active"
-          >
-            <div className="mb-3 grid h-9 w-9 place-items-center rounded-lg bg-brand-gradient/20 text-brand">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
-            </div>
-            <h3 className="font-display text-base font-semibold">{i.t}</h3>
-            <p className="mt-1.5 text-sm text-muted-foreground">{i.d}</p>
-          </Reveal>
-
-        ))}
-      </div>
+      <Reveal className="card-elevated p-8 sm:p-12">
+        <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+          <div>
+            <SectionEyebrow>Cuando el negocio crece</SectionEyebrow>
+            <h2 className="mt-5 font-display text-3xl font-semibold tracking-tight sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
+              ¿Tu operación depende de archivos dispersos, tareas repetitivas o sistemas que no se comunican?
+            </h2>
+            <p className="mt-5 text-muted-foreground sm:text-lg">
+              Ese no es solamente un problema tecnológico. Es tiempo perdido, información difícil de controlar y decisiones que llegan tarde.
+            </p>
+            <a
+              href={waUrl("Hola Tara, quisiera que revisemos nuestro proceso operativo.")}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="group mt-8 inline-flex items-center gap-2 border-b border-white/20 pb-2 text-sm font-semibold text-foreground transition-colors hover:border-brand"
+            >
+              Revisemos tu proceso
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-1"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+          <ul className="flex flex-col justify-center divide-y divide-white/5">
+            {items.map((text, idx) => (
+              <li key={text} className="flex items-start gap-5 py-5">
+                <span className="mt-0.5 font-mono text-sm font-semibold text-destructive">
+                  {String(idx + 1).padStart(2, "0")}
+                </span>
+                <span className="text-base text-foreground/90">{text}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Reveal>
     </section>
   );
 }
@@ -384,38 +394,36 @@ function Pains() {
 function Services() {
   const services = [
     {
-      t: "Plataformas empresariales a medida",
-      d: "CRM, ERP modular, inventarios, gestión operativa, presupuestos, reservas, RR. HH., portales de clientes y tableros de control diseñados a la medida del negocio.",
-      chips: ["CRM", "ERP modular", "Inventarios", "Reservas", "RR. HH.", "Portales"],
+      t: "Plataformas web empresariales",
+      d: "Sistemas administrativos, portales y aplicaciones creadas alrededor de la operación real de tu negocio.",
+      chips: ["Laravel", "React", ".NET", "Bases de datos"],
       icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
-      ),
-      span: "lg:col-span-2 lg:row-span-2",
-    },
-    {
-      t: "Automatización e inteligencia artificial",
-      d: "Flujos con n8n, procesamiento de documentos, asistentes y agentes de IA que conectan tus herramientas y eliminan trabajo manual.",
-      chips: ["n8n", "Agentes IA", "OCR", "Workflows"],
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M7 6.5h.01M10 6.5h.01"/></svg>
       ),
     },
     {
-      t: "Integraciones",
-      d: "APIs REST, WhatsApp Cloud API, pasarelas de pagos, sistemas externos y bases de datos hablando el mismo idioma.",
-      chips: ["APIs", "WhatsApp Cloud", "Pagos", "ETL"],
+      t: "Automatización de procesos",
+      d: "Conectamos herramientas y eliminamos tareas repetitivas para que la información avance sin depender de procesos manuales.",
+      chips: ["n8n", "APIs", "Flujos", "Integraciones"],
       icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3.5"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.2 5.2l2.1 2.1M16.7 16.7l2.1 2.1M5.2 18.8l2.1-2.1M16.7 7.3l2.1-2.1"/></svg>
       ),
     },
     {
-      t: "Modernización y soporte",
-      d: "Evolución de aplicaciones existentes y sistemas legacy: corrección de problemas, optimización y migración gradual sin frenar el negocio.",
-      chips: ["Legacy", ".NET", "Delphi", "Migración"],
+      t: "IA + WhatsApp",
+      d: "Implementamos asistentes, clasificación de información y atención automatizada integrada con los procesos de tu empresa.",
+      chips: ["OpenAI", "WhatsApp", "Meta", "RAG"],
       icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3a9 9 0 0 1 6.4 15.3L20 21l-3-1.5A9 9 0 1 1 12 3z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>
       ),
-      span: "lg:col-span-2",
+    },
+    {
+      t: "Evolución de sistemas",
+      d: "Analizamos aplicaciones existentes, corregimos problemas e incorporamos nuevas funciones sin perder la lógica del negocio.",
+      chips: ["Legacy", "APIs REST", "Optimización", "Soporte"],
+      icon: (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M8 7l-5 5 5 5"/><path d="M16 7l5 5-5 5"/><path d="M14 4l-4 16"/></svg>
+      ),
     },
   ];
 
@@ -424,7 +432,7 @@ function Services() {
       <div className="mx-auto max-w-7xl px-5 py-20">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div className="max-w-2xl">
-            <SectionEyebrow>Soluciones</SectionEyebrow>
+            <SectionEyebrow>Servicios</SectionEyebrow>
             <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
               Cuatro frentes para transformar la operación.
             </h2>
@@ -435,20 +443,25 @@ function Services() {
           <PrimaryCTA>Evaluar mi caso</PrimaryCTA>
         </div>
 
-        <div className="mt-10 grid gap-4 lg:grid-cols-4 lg:grid-rows-2">
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((s, i) => (
             <Reveal
               key={s.t}
               as="article"
               delay={i * 90}
-              className={`card-elevated p-6 tilt-hover tilt-hover-active hover:border-white/15 ${s.span ?? ""}`}
+              className="card-elevated relative flex flex-col p-6 tilt-hover tilt-hover-active hover:border-white/15"
             >
-              <div className="mb-4 inline-grid h-10 w-10 place-items-center rounded-xl bg-brand-gradient/25 text-brand">{s.icon}</div>
-              <h3 className="font-display text-lg font-semibold">{s.t}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.d}</p>
-              <div className="mt-4 flex flex-wrap gap-1.5">
+              <span className="absolute right-5 top-5 font-mono text-xs text-muted-foreground">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <div className="mb-6 inline-grid h-11 w-11 place-items-center rounded-lg border border-brand/40 bg-brand/10 text-brand">
+                {s.icon}
+              </div>
+              <h3 className="font-display text-xl font-semibold leading-snug">{s.t}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.d}</p>
+              <div className="mt-6 flex flex-wrap gap-1.5">
                 {s.chips.map((c) => (
-                  <span key={c} className="rounded-md border border-white/10 bg-white/[0.03] px-2 py-0.5 text-[11px] text-muted-foreground">
+                  <span key={c} className="rounded-full border border-brand/30 bg-brand/5 px-2.5 py-0.5 text-[11px] text-brand/90">
                     {c}
                   </span>
                 ))}
@@ -456,7 +469,6 @@ function Services() {
             </Reveal>
           ))}
         </div>
-
       </div>
     </section>
   );
