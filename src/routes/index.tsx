@@ -506,52 +506,65 @@ function Cases() {
     },
   ];
 
+  const bullets = [
+    "Gestión administrativa, inventarios y recursos humanos",
+    "Presupuestos, reportes y generación de documentos",
+    "Integraciones de pagos, APIs y sistemas heredados",
+    "Automatizaciones, OCR e interacción por WhatsApp",
+  ];
+
   return (
-    <section id="casos" className="mx-auto max-w-7xl px-5 py-20">
-      <div className="max-w-2xl">
-        <SectionEyebrow>Casos reales</SectionEyebrow>
-        <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
-          Soluciones que hoy están corriendo.
-        </h2>
-        <p className="mt-3 text-muted-foreground">
-          Presentamos los casos de forma anónima por confidencialidad. Podemos ampliar detalles en una conversación.
-        </p>
-      </div>
+    <section id="casos" className="mx-auto max-w-7xl px-5 py-24">
+      <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+        {/* Left: manifesto */}
+        <Reveal className="lg:sticky lg:top-24 lg:self-start">
+          <SectionEyebrow>Casos reales</SectionEyebrow>
+          <h2 className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-[3.5rem]">
+            Sistemas construidos para operaciones{" "}
+            <span className="italic text-destructive">reales.</span>
+          </h2>
+          <p className="mt-5 text-muted-foreground sm:text-lg">
+            Hemos trabajado en soluciones empresariales de diferentes sectores, conectando software, datos y procesos. Presentamos los casos de forma anónima por confidencialidad.
+          </p>
+          <ul className="mt-8 space-y-3.5">
+            {bullets.map((b) => (
+              <li key={b} className="flex items-start gap-3 text-sm text-foreground/90">
+                <span className="mt-0.5 grid h-5 w-5 flex-none place-items-center rounded-full border border-brand/40 bg-brand/10 text-brand">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                </span>
+                {b}
+              </li>
+            ))}
+          </ul>
+        </Reveal>
 
-      <div className="mt-10 grid gap-4 md:grid-cols-2">
-        {cases.map((c, i) => (
-          <Reveal
-            key={c.t}
-            as="article"
-            delay={i * 100}
-            className="card-elevated group overflow-hidden tilt-hover tilt-hover-active"
-          >
-            <div className="relative flex items-center justify-between border-b border-white/5 px-5 py-3">
-              <span className="text-[11px] font-medium uppercase tracking-widest text-brand">{c.tag}</span>
-              <span className="text-[11px] text-muted-foreground">Caso</span>
-              <span aria-hidden className="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-brand/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-            </div>
-            <div className="p-6">
-              <h3 className="font-display text-lg font-semibold leading-snug">{c.t}</h3>
-              <dl className="mt-4 space-y-3 text-sm">
-                <div>
-                  <dt className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">Problema</dt>
-                  <dd className="mt-1 text-foreground/90">{c.p}</dd>
-                </div>
-                <div>
-                  <dt className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">Solución</dt>
-                  <dd className="mt-1 text-foreground/90">{c.s}</dd>
-                </div>
-                <div>
-                  <dt className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">Efecto operativo</dt>
-                  <dd className="mt-1 text-foreground/90">{c.e}</dd>
-                </div>
-              </dl>
-            </div>
-          </Reveal>
-        ))}
+        {/* Right: stacked case cards */}
+        <div className="space-y-4">
+          {cases.map((c, i) => (
+            <Reveal
+              key={c.t}
+              as="article"
+              delay={i * 90}
+              className="group relative rounded-2xl border border-white/10 bg-surface/40 p-6 sm:p-7 transition-all hover:border-brand/40 hover:bg-surface/60"
+            >
+              <span aria-hidden className="absolute left-0 top-6 h-8 w-[3px] rounded-r bg-brand opacity-0 transition-opacity group-hover:opacity-100" />
+              <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand">
+                {c.tag}
+              </div>
+              <h3 className="mt-2 font-display text-xl font-semibold leading-snug sm:text-2xl">
+                {c.t}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                {c.s}
+              </p>
+              <p className="mt-4 text-xs text-foreground/60">
+                <span className="text-muted-foreground">Efecto operativo · </span>
+                {c.e}
+              </p>
+            </Reveal>
+          ))}
+        </div>
       </div>
-
     </section>
   );
 }
