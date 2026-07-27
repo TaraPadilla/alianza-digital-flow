@@ -151,6 +151,18 @@ html {
     filter: brightness(1.08);
   }
 }
+@utility btn-whatsapp {
+  background-image: linear-gradient(135deg, oklch(0.72 0.18 142) 0%, oklch(0.65 0.22 155) 100%);
+  color: white;
+  box-shadow: 0 20px 60px -20px oklch(0.72 0.18 142 / 0.5);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+@utility btn-whatsapp-hover {
+  &:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.08);
+  }
+}
 
 @keyframes floatY {
   0%, 100% { transform: translateY(0); }
