@@ -100,6 +100,8 @@ function GhostCTA({ children, href }: { children: ReactNode; href: string }) {
   return (
     <a
       href={href}
+      target={href.startsWith("http") ? "_blank" : undefined}
+      rel="noreferrer noopener"
       className="inline-flex items-center gap-2 rounded-xl glass px-5 py-3 text-sm font-semibold text-foreground/90 transition hover:text-foreground hover:border-white/20"
     >
       {children}
@@ -111,6 +113,7 @@ function GhostCTA({ children, href }: { children: ReactNode; href: string }) {
 
 function Header() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const nav = [
     { href: "#soluciones", label: "Soluciones" },
     { href: "#casos", label: "Casos" },
@@ -118,18 +121,36 @@ function Header() {
     { href: "#sobre", label: "Sobre Tara" },
     { href: "#faq", label: "Preguntas" },
   ];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 border-b border-white/5 bg-background/70 backdrop-blur-xl">
-      <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-4 sm:flex sm:justify-between">
-        <a href="#top" className="flex min-w-0 items-center gap-2">
-          <span aria-hidden className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-brand-gradient text-[10px] font-bold text-white">A/F1</span>
-          <span className="truncate font-display text-lg font-semibold tracking-tight">
-            Alianza <span className="text-gradient">F1</span>
-          </span>
+    <header className={`sticky top-0 z-50 border-b border-white/5 bg-background/70 backdrop-blur-xl transition-all duration-300 ${scrolled ? "py-2" : "py-4"}`}>
+      <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 sm:flex sm:justify-between">
+        <a href="#top" className="flex min-w-0 items-center gap-3">
+          <img 
+            src="/Logo.png" 
+            alt="Alianza F1 Logo" 
+            className={`shrink-0 object-contain transition-all duration-300 ${scrolled ? "h-12 w-12 mt-0 ml-0" : "-mt-8 -ml-4 h-40 w-40"}`} 
+          />
+          <div className="flex flex-col">
+            <span className={`truncate font-display font-semibold tracking-tight transition-all duration-300 ${scrolled ? "text-xl" : "text-3xl"}`}>
+              <span className="text-gradient">Web & Móvil</span>
+            </span>
+            <span className={`text-base text-muted-foreground hidden sm:block transition-all duration-300 ${scrolled ? "opacity-0 h-0" : "opacity-100"}`}>
+              Transformando ideas en soluciones digitales innovadoras y eficientes.
+            </span>
+          </div>
         </a>
         <nav aria-label="Principal" className="hidden items-center gap-7 md:flex">
           {nav.map((n) => (
-            <a key={n.href} href={n.href} className="text-sm text-muted-foreground transition hover:text-foreground">
+            <a key={n.href} href={n.href} className="text-base text-muted-foreground transition hover:text-foreground">
               {n.label}
             </a>
           ))}
@@ -144,7 +165,8 @@ function Header() {
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
           </button>
-          <a href={waUrl()} target="_blank" rel="noreferrer" className="hidden sm:inline-flex items-center gap-2 rounded-xl btn-primary btn-primary-hover px-4 py-2 text-sm font-semibold">
+          <a href={waUrl()} target="_blank" rel="noreferrer" className="hidden sm:inline-flex items-center gap-2 rounded-xl btn-primary btn-primary-hover px-4 py-2 text-base font-semibold">
+            <img src="/whatsapp.svg" alt="WhatsApp" className="h-5 w-5" />
             Hablemos
           </a>
         </div>
@@ -158,6 +180,7 @@ function Header() {
               </a>
             ))}
             <a href={waUrl()} target="_blank" rel="noreferrer" className="mt-2 rounded-lg btn-primary btn-primary-hover px-3 py-2 text-center text-sm font-semibold">
+              <img src="/whatsapp.svg" alt="WhatsApp" className="h-4 w-4 inline mr-1" />
               Hablemos
             </a>
           </nav>
@@ -319,10 +342,22 @@ function Hero() {
 
 function TrustStrip() {
   const items = [
-    "Proveedora tecnológica autorizada de Meta (WhatsApp)",
-    "AWS Certified Cloud Practitioner",
-    "Oracle Cloud — Inteligencia Artificial",
-    "Entrega de código fuente y control de versiones",
+    {
+      text: "Proveedora tecnológica autorizada de Meta (WhatsApp)",
+      icon: <img src="/meta.svg" alt="Meta" className="h-6 w-6" />,
+    },
+    {
+      text: "AWS Certified Cloud Practitioner",
+      icon: <img src="/aws.svg" alt="AWS" className="h-6 w-6" />,
+    },
+    {
+      text: "Oracle Cloud — Inteligencia Artificial",
+      icon: <img src="/oracle.svg" alt="Oracle Cloud" className="h-6 w-6" />,
+    },
+    {
+      text: "Entrega de código fuente y control de versiones",
+      icon: <img src="/git.svg" alt="Git" className="h-6 w-6" />,
+    },
   ];
   const loop = [...items, ...items];
   return (
@@ -332,10 +367,10 @@ function TrustStrip() {
         style={{ maskImage: "linear-gradient(90deg, transparent, black 10%, black 90%, transparent)", WebkitMaskImage: "linear-gradient(90deg, transparent, black 10%, black 90%, transparent)" }}
       >
         <ul className="flex w-max items-center gap-10 whitespace-nowrap text-xs text-muted-foreground sm:text-sm animate-marquee group-hover:[animation-play-state:paused]">
-          {loop.map((i, idx) => (
-            <li key={`${i}-${idx}`} className="flex items-center gap-2">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" className="text-brand"><path d="M20 6L9 17l-5-5"/></svg>
-              <span>{i}</span>
+          {loop.map((item, idx) => (
+            <li key={`${item.text}-${idx}`} className="flex items-center gap-2">
+              {item.icon}
+              <span>{item.text}</span>
               <span aria-hidden className="ml-10 h-1 w-1 rounded-full bg-white/20" />
             </li>
           ))}
@@ -345,6 +380,69 @@ function TrustStrip() {
   );
 }
 
+function BlogBanner() {
+  return (
+    <section className="mx-auto max-w-7xl px-5 py-12">
+      <div className="grid gap-8 lg:grid-cols-2">
+        {/* Blog Banner */}
+        <Reveal className="relative overflow-hidden rounded-2xl border border-brand/30 bg-gradient-to-br from-brand/10 via-accent/5 to-brand/10">
+          <div aria-hidden className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-brand/20 blur-3xl" />
+          <div aria-hidden className="absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-accent/20 blur-3xl" />
+          
+          <div className="relative flex flex-col">
+            <img 
+              src="/BannerBlog.png" 
+              alt="Blog de tecnología y desarrollo web" 
+              className="w-full h-auto rounded-t-2xl"
+              style={{ aspectRatio: '700/460' }}
+            />
+            <div className="px-4 sm:px-6 py-4 sm:py-6">
+              <a
+                href="https://blog.tecnologiaydesarrolloweb.com/"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="inline-flex items-center gap-2 rounded-xl btn-primary btn-primary-hover px-5 py-3 text-sm font-semibold shadow-lg"
+              >
+                Visitar el blog
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M13 5l7 7-7 7"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* Bot Banner */}
+        <Reveal className="relative overflow-hidden rounded-2xl border border-accent/30 bg-gradient-to-br from-accent/10 via-brand/5 to-accent/10">
+          <div aria-hidden className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-accent/20 blur-3xl" />
+          <div aria-hidden className="absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-brand/20 blur-3xl" />
+          
+          <div className="relative flex flex-col">
+            <img 
+              src="/BannerBot.png" 
+              alt="Bot inteligente de Alianza F1" 
+              className="w-full h-auto rounded-t-2xl"
+              style={{ aspectRatio: '700/460' }}
+            />
+            <div className="px-4 sm:px-6 py-4 sm:py-6">
+              <a
+                href="https://ia.tecnologiaydesarrolloweb.com/"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="inline-flex items-center gap-2 rounded-xl btn-primary btn-primary-hover px-5 py-3 text-sm font-semibold shadow-lg"
+              >
+                Prueba ahora
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M13 5l7 7-7 7"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
 
 function Pains() {
   const items = [
@@ -371,6 +469,7 @@ function Pains() {
               rel="noreferrer noopener"
               className="group mt-8 inline-flex items-center gap-2 border-b border-white/20 pb-2 text-sm font-semibold text-foreground transition-colors hover:border-brand"
             >
+              <img src="/whatsapp.svg" alt="WhatsApp" className="h-4 w-4" />
               Revisemos tu proceso
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-1"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
             </a>
@@ -615,18 +714,11 @@ function About() {
           <div aria-hidden className="absolute inset-0 -z-10 rounded-3xl bg-brand-gradient/25 blur-3xl" />
           <div className="card-elevated relative overflow-hidden">
             <div className="aspect-[4/5] w-full">
-              {/* Elegant placeholder area for future real photo */}
-              <div className="relative flex h-full w-full items-center justify-center">
-                <div aria-hidden className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,oklch(0.72_0.19_258/0.25),transparent_60%),radial-gradient(circle_at_70%_80%,oklch(0.66_0.22_300/0.25),transparent_60%)]" />
-                <div className="relative text-center">
-                  <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full glass">
-                    <span className="font-display text-3xl font-semibold text-gradient">TC</span>
-                  </div>
-                  <p className="mt-4 text-xs uppercase tracking-widest text-muted-foreground">
-                    Espacio reservado para fotografía
-                  </p>
-                </div>
-              </div>
+              <img 
+                src="/Tara.png" 
+                alt="Tara Campos Padilla - Ingeniera de software" 
+                className="h-full w-full object-cover"
+              />
             </div>
             <div className="border-t border-white/5 px-5 py-3 text-xs text-muted-foreground">
               Tara Campos Padilla · Ingeniera de software
@@ -754,6 +846,7 @@ function ContactForm() {
       </div>
       <div className="mt-6 flex flex-wrap items-center gap-3">
         <button type="submit" className="inline-flex items-center gap-2 rounded-xl btn-primary btn-primary-hover px-5 py-3 text-sm font-semibold">
+          <img src="/whatsapp.svg" alt="WhatsApp" className="h-4 w-4" />
           Enviar por WhatsApp
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </button>
@@ -876,7 +969,7 @@ function FloatingWhatsApp() {
       aria-label="Escribir por WhatsApp"
       className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 rounded-full btn-primary btn-primary-hover px-4 py-3 text-sm font-semibold shadow-lg"
     >
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden><path d="M20.5 3.5A11 11 0 0 0 3.4 17.3L2 22l4.8-1.3A11 11 0 1 0 20.5 3.5Zm-8.6 17a9 9 0 0 1-4.6-1.3l-.3-.2-2.9.8.8-2.8-.2-.3A9 9 0 1 1 11.9 20.5Zm5.2-6.7c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-1 1.1-.2.2-.4.2-.7.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4s-1 1-1 2.5 1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.3.2 1.9.1.6-.1 1.7-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.3Z"/></svg>
+      <img src="/whatsapp.svg" alt="WhatsApp" className="h-5 w-5" />
       Hablemos
     </a>
   );
@@ -892,6 +985,7 @@ function LandingPage() {
       <main>
         <Hero />
         <TrustStrip />
+        <BlogBanner />
         <Pains />
         <Services />
         <Cases />
