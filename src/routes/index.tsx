@@ -1,10 +1,28 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState, type FormEvent, type ReactNode, type CSSProperties } from "react";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type FormEvent,
+  type ReactNode,
+  type CSSProperties,
+} from "react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 /* ---------- Scroll reveal ---------- */
 function Reveal({
@@ -55,7 +73,6 @@ function Reveal({
   );
 }
 
-
 export const Route = createFileRoute("/")({
   head: () => ({
     links: [{ rel: "canonical", href: "/" }],
@@ -79,7 +96,15 @@ function SectionEyebrow({ children }: { children: ReactNode }) {
   );
 }
 
-function PrimaryCTA({ children, href = waUrl(), className = "" }: { children: ReactNode; href?: string; className?: string }) {
+function PrimaryCTA({
+  children,
+  href = waUrl(),
+  className = "",
+}: {
+  children: ReactNode;
+  href?: string;
+  className?: string;
+}) {
   const isWhatsApp = href?.includes("wa.me");
   return (
     <a
@@ -90,8 +115,18 @@ function PrimaryCTA({ children, href = waUrl(), className = "" }: { children: Re
     >
       {isWhatsApp && <img src="/whatsapp.svg" alt="WhatsApp" className="h-4 w-4" />}
       {children}
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M5 12h14M13 5l7 7-7 7"/>
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M5 12h14M13 5l7 7-7 7" />
       </svg>
     </a>
   );
@@ -132,26 +167,36 @@ function Header() {
   }, []);
 
   return (
-    <header className={`sticky top-0 z-50 border-b border-white/5 bg-background/70 backdrop-blur-xl transition-all duration-300 ${scrolled ? "py-2" : "py-4"}`}>
+    <header
+      className={`sticky top-0 z-50 border-b border-white/5 bg-background/70 backdrop-blur-xl transition-all duration-300 ${scrolled ? "py-2" : "py-4"}`}
+    >
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 sm:flex sm:justify-between">
         <a href="#top" className="flex min-w-0 items-center gap-3">
-          <img 
-            src="/Logo.png" 
-            alt="Alianza F1 Logo" 
-            className={`shrink-0 object-contain transition-all duration-300 ${scrolled ? "h-12 w-12 mt-0 ml-0" : "-mt-8 -ml-4 h-40 w-40"}`} 
+          <img
+            src="/Logo.png"
+            alt="Alianza F1 Logo"
+            className={`shrink-0 object-contain transition-all duration-300 ${scrolled ? "h-12 w-12 mt-0 ml-0" : "-mt-8 -ml-4 h-40 w-40"}`}
           />
           <div className="flex flex-col">
-            <span className={`truncate font-display font-semibold tracking-tight transition-all duration-300 ${scrolled ? "text-xl" : "text-3xl"}`}>
+            <span
+              className={`truncate font-display font-semibold tracking-tight transition-all duration-300 ${scrolled ? "text-xl" : "text-3xl"}`}
+            >
               <span className="text-gradient">Web & Móvil</span>
             </span>
-            <span className={`text-base text-muted-foreground hidden sm:block transition-all duration-300 ${scrolled ? "opacity-0 h-0" : "opacity-100"}`}>
+            <span
+              className={`text-base text-muted-foreground hidden sm:block transition-all duration-300 ${scrolled ? "opacity-0 h-0" : "opacity-100"}`}
+            >
               Transformando ideas en soluciones digitales innovadoras y eficientes.
             </span>
           </div>
         </a>
         <nav aria-label="Principal" className="hidden items-center gap-7 md:flex">
           {nav.map((n) => (
-            <a key={n.href} href={n.href} className="text-base text-muted-foreground transition hover:text-foreground">
+            <a
+              key={n.href}
+              href={n.href}
+              className="text-base text-muted-foreground transition hover:text-foreground"
+            >
               {n.label}
             </a>
           ))}
@@ -164,9 +209,23 @@ function Header() {
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path d="M3 6h18M3 12h18M3 18h18" />
+            </svg>
           </button>
-          <a href={waUrl()} target="_blank" rel="noreferrer" className="hidden sm:inline-flex items-center gap-2 rounded-xl btn-whatsapp btn-whatsapp-hover px-4 py-2 text-base font-semibold">
+          <a
+            href={waUrl()}
+            target="_blank"
+            rel="noreferrer"
+            className="hidden sm:inline-flex items-center gap-2 rounded-xl btn-whatsapp btn-whatsapp-hover px-4 py-2 text-base font-semibold"
+          >
             <img src="/whatsapp.svg" alt="WhatsApp" className="h-5 w-5" />
             Hablemos
           </a>
@@ -176,11 +235,21 @@ function Header() {
         <div className="border-t border-white/5 bg-background/95 md:hidden">
           <nav aria-label="Móvil" className="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-3">
             {nav.map((n) => (
-              <a key={n.href} href={n.href} onClick={() => setOpen(false)} className="rounded-lg px-3 py-2 text-sm text-muted-foreground hover:bg-white/5 hover:text-foreground">
+              <a
+                key={n.href}
+                href={n.href}
+                onClick={() => setOpen(false)}
+                className="rounded-lg px-3 py-2 text-sm text-muted-foreground hover:bg-white/5 hover:text-foreground"
+              >
                 {n.label}
               </a>
             ))}
-            <a href={waUrl()} target="_blank" rel="noreferrer" className="mt-2 rounded-lg btn-whatsapp btn-whatsapp-hover px-3 py-2 text-center text-sm font-semibold">
+            <a
+              href={waUrl()}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-2 rounded-lg btn-whatsapp btn-whatsapp-hover px-3 py-2 text-center text-sm font-semibold"
+            >
               <img src="/whatsapp.svg" alt="WhatsApp" className="h-4 w-4 inline mr-1" />
               Hablemos
             </a>
@@ -197,17 +266,28 @@ function HeroVisual() {
   return (
     <div className="relative aspect-[5/4] w-full">
       {/* ambient blobs */}
-      <div aria-hidden className="absolute -left-10 -top-10 h-64 w-64 rounded-full bg-brand/30 blur-3xl" />
-      <div aria-hidden className="absolute -bottom-10 -right-10 h-64 w-64 rounded-full bg-accent/30 blur-3xl" />
+      <div
+        aria-hidden
+        className="absolute -left-10 -top-10 h-64 w-64 rounded-full bg-brand/30 blur-3xl"
+      />
+      <div
+        aria-hidden
+        className="absolute -bottom-10 -right-10 h-64 w-64 rounded-full bg-accent/30 blur-3xl"
+      />
 
       {/* dashboard card */}
-      <div className="relative h-full w-full card-elevated overflow-hidden p-4 sm:p-5" style={{ boxShadow: "var(--shadow-elegant)" }}>
+      <div
+        className="relative h-full w-full card-elevated overflow-hidden p-4 sm:p-5"
+        style={{ boxShadow: "var(--shadow-elegant)" }}
+      >
         {/* window chrome */}
         <div className="flex items-center gap-2 border-b border-white/5 pb-3">
           <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
           <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/70" />
           <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/70" />
-          <div className="ml-3 flex-1 truncate rounded-md bg-white/5 px-2 py-1 text-[10px] text-muted-foreground">alianzaf1.app / operaciones</div>
+          <div className="ml-3 flex-1 truncate rounded-md bg-white/5 px-2 py-1 text-[10px] text-muted-foreground">
+            alianzaf1.app / operaciones
+          </div>
         </div>
 
         <div className="mt-4 grid grid-cols-6 gap-3">
@@ -217,8 +297,13 @@ function HeroVisual() {
             { l: "Automatizaciones", v: "137" },
             { l: "Integraciones", v: "9" },
           ].map((k) => (
-            <div key={k.l} className="col-span-2 rounded-xl border border-white/5 bg-white/[0.03] p-3">
-              <div className="text-[10px] uppercase tracking-widest text-muted-foreground">{k.l}</div>
+            <div
+              key={k.l}
+              className="col-span-2 rounded-xl border border-white/5 bg-white/[0.03] p-3"
+            >
+              <div className="text-[10px] uppercase tracking-widest text-muted-foreground">
+                {k.l}
+              </div>
               <div className="mt-1 font-display text-2xl font-semibold text-gradient">{k.v}</div>
             </div>
           ))}
@@ -245,8 +330,23 @@ function HeroVisual() {
                 { x: 430, y: 70, label: "Cliente" },
               ].map((n) => (
                 <g key={n.label}>
-                  <circle cx={n.x} cy={n.y} r="18" fill="oklch(0.24 0.05 265)" stroke="url(#line)" strokeWidth="1.5" />
-                  <text x={n.x} y={n.y + 4} textAnchor="middle" fontSize="9" fill="oklch(0.9 0.02 258)">{n.label}</text>
+                  <circle
+                    cx={n.x}
+                    cy={n.y}
+                    r="18"
+                    fill="oklch(0.24 0.05 265)"
+                    stroke="url(#line)"
+                    strokeWidth="1.5"
+                  />
+                  <text
+                    x={n.x}
+                    y={n.y + 4}
+                    textAnchor="middle"
+                    fontSize="9"
+                    fill="oklch(0.9 0.02 258)"
+                  >
+                    {n.label}
+                  </text>
                 </g>
               ))}
               {/* edges */}
@@ -257,14 +357,24 @@ function HeroVisual() {
                 "M178,110 C 220,110 240,70 282,70",
                 "M318,70 L 412,70",
               ].map((d, i) => (
-                <path key={i} d={d} fill="none" stroke="url(#line)" strokeWidth="1.5" strokeDasharray="4 6" className="animate-dash" />
+                <path
+                  key={i}
+                  d={d}
+                  fill="none"
+                  stroke="url(#line)"
+                  strokeWidth="1.5"
+                  strokeDasharray="4 6"
+                  className="animate-dash"
+                />
               ))}
             </svg>
           </div>
 
           {/* Mini chart */}
           <div className="col-span-4 rounded-xl border border-white/5 bg-white/[0.03] p-3">
-            <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Tareas manuales eliminadas</div>
+            <div className="text-[10px] uppercase tracking-widest text-muted-foreground">
+              Tareas manuales eliminadas
+            </div>
             <svg viewBox="0 0 240 60" className="mt-2 w-full">
               <defs>
                 <linearGradient id="area" x1="0" y1="0" x2="0" y2="1">
@@ -272,14 +382,28 @@ function HeroVisual() {
                   <stop offset="100%" stopColor="oklch(0.72 0.19 258 / 0)" />
                 </linearGradient>
               </defs>
-              <path d="M0,50 L20,44 L40,46 L60,38 L80,30 L100,32 L120,24 L140,18 L160,20 L180,12 L200,10 L220,6 L240,4 L240,60 L0,60 Z" fill="url(#area)" />
-              <path d="M0,50 L20,44 L40,46 L60,38 L80,30 L100,32 L120,24 L140,18 L160,20 L180,12 L200,10 L220,6 L240,4" fill="none" stroke="oklch(0.78 0.16 275)" strokeWidth="1.5" />
+              <path
+                d="M0,50 L20,44 L40,46 L60,38 L80,30 L100,32 L120,24 L140,18 L160,20 L180,12 L200,10 L220,6 L240,4 L240,60 L0,60 Z"
+                fill="url(#area)"
+              />
+              <path
+                d="M0,50 L20,44 L40,46 L60,38 L80,30 L100,32 L120,24 L140,18 L160,20 L180,12 L200,10 L220,6 L240,4"
+                fill="none"
+                stroke="oklch(0.78 0.16 275)"
+                strokeWidth="1.5"
+              />
             </svg>
           </div>
           <div className="col-span-2 flex flex-col gap-2 rounded-xl border border-white/5 bg-white/[0.03] p-3">
-            <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Estado</div>
-            <div className="flex items-center gap-2 text-xs"><span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse-glow" /> Operando</div>
-            <div className="flex items-center gap-2 text-xs"><span className="h-2 w-2 rounded-full bg-brand animate-pulse-glow" /> 3 flujos activos</div>
+            <div className="text-[10px] uppercase tracking-widest text-muted-foreground">
+              Estado
+            </div>
+            <div className="flex items-center gap-2 text-xs">
+              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse-glow" /> Operando
+            </div>
+            <div className="flex items-center gap-2 text-xs">
+              <span className="h-2 w-2 rounded-full bg-brand animate-pulse-glow" /> 3 flujos activos
+            </div>
           </div>
         </div>
       </div>
@@ -295,25 +419,34 @@ function Hero() {
       {/* Aurora blobs */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-0">
         <div className="absolute -left-32 top-10 h-[420px] w-[420px] rounded-full bg-brand/25 blur-3xl animate-aurora" />
-        <div className="absolute -right-24 top-40 h-[380px] w-[380px] rounded-full bg-accent/25 blur-3xl animate-aurora" style={{ animationDelay: "-6s" }} />
-        <div className="absolute left-1/3 -bottom-32 h-[360px] w-[360px] rounded-full bg-brand-2/20 blur-3xl animate-aurora" style={{ animationDelay: "-12s" }} />
+        <div
+          className="absolute -right-24 top-40 h-[380px] w-[380px] rounded-full bg-accent/25 blur-3xl animate-aurora"
+          style={{ animationDelay: "-6s" }}
+        />
+        <div
+          className="absolute left-1/3 -bottom-32 h-[360px] w-[360px] rounded-full bg-brand-2/20 blur-3xl animate-aurora"
+          style={{ animationDelay: "-12s" }}
+        />
       </div>
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 pb-20 pt-16 lg:grid-cols-[1.05fr_1fr] lg:pt-24">
         <div className="animate-fade-up">
           <SectionEyebrow>Software empresarial a medida</SectionEyebrow>
           <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
-            Tecnología que se <span className="text-gradient-animated">adapta a tu negocio</span>, no al contrario.
+            Tecnología que se <span className="text-gradient-animated">adapta a tu negocio</span>,
+            no al contrario.
           </h1>
           <p className="mt-5 max-w-xl text-base text-muted-foreground sm:text-lg">
-            Diseñamos plataformas empresariales, automatizaciones e integraciones que
-            eliminan tareas manuales y convierten tus procesos en sistemas eficientes.
+            Diseñamos plataformas empresariales, automatizaciones e integraciones que eliminan
+            tareas manuales y convierten tus procesos en sistemas eficientes.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <PrimaryCTA>Cuéntame tu proyecto</PrimaryCTA>
             <GhostCTA href="#soluciones">Ver soluciones</GhostCTA>
           </div>
-          <p className="mt-3 text-xs text-muted-foreground">Evaluación inicial sin compromiso · Respuesta directa por WhatsApp.</p>
+          <p className="mt-3 text-xs text-muted-foreground">
+            Evaluación inicial sin compromiso · Respuesta directa por WhatsApp.
+          </p>
 
           <dl className="mt-10 grid max-w-lg grid-cols-3 gap-4">
             {[
@@ -340,7 +473,6 @@ function Hero() {
   );
 }
 
-
 function TrustStrip() {
   const items = [
     {
@@ -365,7 +497,10 @@ function TrustStrip() {
     <section aria-label="Confianza" className="relative border-y border-white/5 bg-surface/40">
       <div
         className="group relative overflow-hidden py-5"
-        style={{ maskImage: "linear-gradient(90deg, transparent, black 10%, black 90%, transparent)", WebkitMaskImage: "linear-gradient(90deg, transparent, black 10%, black 90%, transparent)" }}
+        style={{
+          maskImage: "linear-gradient(90deg, transparent, black 10%, black 90%, transparent)",
+          WebkitMaskImage: "linear-gradient(90deg, transparent, black 10%, black 90%, transparent)",
+        }}
       >
         <ul className="flex w-max items-center gap-10 whitespace-nowrap text-xs text-muted-foreground sm:text-sm animate-marquee group-hover:[animation-play-state:paused]">
           {loop.map((item, idx) => (
@@ -387,15 +522,21 @@ function BlogBanner() {
       <div className="grid gap-8 lg:grid-cols-2">
         {/* Blog Banner */}
         <Reveal className="relative overflow-hidden rounded-2xl border border-brand/30 bg-gradient-to-br from-brand/10 via-accent/5 to-brand/10">
-          <div aria-hidden className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-brand/20 blur-3xl" />
-          <div aria-hidden className="absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-accent/20 blur-3xl" />
-          
+          <div
+            aria-hidden
+            className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-brand/20 blur-3xl"
+          />
+          <div
+            aria-hidden
+            className="absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-accent/20 blur-3xl"
+          />
+
           <div className="relative flex flex-col">
-            <img 
-              src="/BannerBlog.png" 
-              alt="Blog de tecnología y desarrollo web" 
+            <img
+              src="/BannerBlog.png"
+              alt="Blog de tecnología y desarrollo web"
               className="w-full h-auto rounded-t-2xl"
-              style={{ aspectRatio: '700/460' }}
+              style={{ aspectRatio: "700/460" }}
             />
             <div className="px-4 sm:px-6 py-4 sm:py-6">
               <a
@@ -405,8 +546,18 @@ function BlogBanner() {
                 className="inline-flex items-center gap-2 rounded-xl btn-primary btn-primary-hover px-5 py-3 text-sm font-semibold shadow-lg"
               >
                 Visitar el blog
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M5 12h14M13 5l7 7-7 7"/>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M13 5l7 7-7 7" />
                 </svg>
               </a>
             </div>
@@ -415,15 +566,21 @@ function BlogBanner() {
 
         {/* Bot Banner */}
         <Reveal className="relative overflow-hidden rounded-2xl border border-accent/30 bg-gradient-to-br from-accent/10 via-brand/5 to-accent/10">
-          <div aria-hidden className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-accent/20 blur-3xl" />
-          <div aria-hidden className="absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-brand/20 blur-3xl" />
-          
+          <div
+            aria-hidden
+            className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-accent/20 blur-3xl"
+          />
+          <div
+            aria-hidden
+            className="absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-brand/20 blur-3xl"
+          />
+
           <div className="relative flex flex-col">
-            <img 
-              src="/BannerBot.png" 
-              alt="Bot inteligente de Alianza F1" 
+            <img
+              src="/BannerBot.png"
+              alt="Bot inteligente de Alianza F1"
               className="w-full h-auto rounded-t-2xl"
-              style={{ aspectRatio: '700/460' }}
+              style={{ aspectRatio: "700/460" }}
             />
             <div className="px-4 sm:px-6 py-4 sm:py-6">
               <a
@@ -433,8 +590,18 @@ function BlogBanner() {
                 className="inline-flex items-center gap-2 rounded-xl btn-primary btn-primary-hover px-5 py-3 text-sm font-semibold shadow-lg"
               >
                 Prueba ahora
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M5 12h14M13 5l7 7-7 7"/>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M13 5l7 7-7 7" />
                 </svg>
               </a>
             </div>
@@ -459,10 +626,12 @@ function Pains() {
           <div>
             <SectionEyebrow>Cuando el negocio crece</SectionEyebrow>
             <h2 className="mt-5 font-display text-3xl font-semibold tracking-tight sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
-              ¿Tu operación depende de archivos dispersos, tareas repetitivas o sistemas que no se comunican?
+              ¿Tu operación depende de archivos dispersos, tareas repetitivas o sistemas que no se
+              comunican?
             </h2>
             <p className="mt-5 text-muted-foreground sm:text-lg">
-              Ese no es solamente un problema tecnológico. Es tiempo perdido, información difícil de controlar y decisiones que llegan tarde.
+              Ese no es solamente un problema tecnológico. Es tiempo perdido, información difícil de
+              controlar y decisiones que llegan tarde.
             </p>
             <a
               href={waUrl("Hola Tara, quisiera que revisemos nuestro proceso operativo.")}
@@ -472,7 +641,19 @@ function Pains() {
             >
               <img src="/whatsapp.svg" alt="WhatsApp" className="h-4 w-4" />
               Revisemos tu proceso
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-1"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="transition-transform group-hover:translate-x-1"
+              >
+                <path d="M5 12h14M13 5l7 7-7 7" />
+              </svg>
             </a>
           </div>
           <ul className="flex flex-col justify-center divide-y divide-white/5">
@@ -498,7 +679,20 @@ function Services() {
       d: "Sistemas administrativos, portales y aplicaciones creadas alrededor de la operación real de tu negocio.",
       chips: ["Laravel", "React", ".NET", "Bases de datos"],
       icon: (
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M7 6.5h.01M10 6.5h.01"/></svg>
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <rect x="3" y="4" width="18" height="16" rx="2" />
+          <path d="M3 9h18" />
+          <path d="M7 6.5h.01M10 6.5h.01" />
+        </svg>
       ),
     },
     {
@@ -506,7 +700,19 @@ function Services() {
       d: "Conectamos herramientas y eliminamos tareas repetitivas para que la información avance sin depender de procesos manuales.",
       chips: ["n8n", "APIs", "Flujos", "Integraciones"],
       icon: (
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3.5"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.2 5.2l2.1 2.1M16.7 16.7l2.1 2.1M5.2 18.8l2.1-2.1M16.7 7.3l2.1-2.1"/></svg>
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <circle cx="12" cy="12" r="3.5" />
+          <path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.2 5.2l2.1 2.1M16.7 16.7l2.1 2.1M5.2 18.8l2.1-2.1M16.7 7.3l2.1-2.1" />
+        </svg>
       ),
     },
     {
@@ -514,7 +720,19 @@ function Services() {
       d: "Implementamos asistentes, clasificación de información y atención automatizada integrada con los procesos de tu empresa.",
       chips: ["OpenAI", "WhatsApp", "Meta", "RAG"],
       icon: (
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3a9 9 0 0 1 6.4 15.3L20 21l-3-1.5A9 9 0 1 1 12 3z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M12 3a9 9 0 0 1 6.4 15.3L20 21l-3-1.5A9 9 0 1 1 12 3z" />
+          <path d="M8.5 12h.01M12 12h.01M15.5 12h.01" />
+        </svg>
       ),
     },
     {
@@ -522,7 +740,20 @@ function Services() {
       d: "Analizamos aplicaciones existentes, corregimos problemas e incorporamos nuevas funciones sin perder la lógica del negocio.",
       chips: ["Legacy", "APIs REST", "Optimización", "Soporte"],
       icon: (
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M8 7l-5 5 5 5"/><path d="M16 7l5 5-5 5"/><path d="M14 4l-4 16"/></svg>
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M8 7l-5 5 5 5" />
+          <path d="M16 7l5 5-5 5" />
+          <path d="M14 4l-4 16" />
+        </svg>
       ),
     },
   ];
@@ -537,7 +768,8 @@ function Services() {
               Cuatro frentes para transformar la operación.
             </h2>
             <p className="mt-3 text-muted-foreground">
-              Diseñamos cada solución alrededor de un proceso real del negocio. Nada de plantillas genéricas.
+              Diseñamos cada solución alrededor de un proceso real del negocio. Nada de plantillas
+              genéricas.
             </p>
           </div>
           <PrimaryCTA>Evaluar mi caso</PrimaryCTA>
@@ -561,7 +793,10 @@ function Services() {
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.d}</p>
               <div className="mt-6 flex flex-wrap gap-1.5">
                 {s.chips.map((c) => (
-                  <span key={c} className="rounded-full border border-brand/30 bg-brand/5 px-2.5 py-0.5 text-[11px] text-brand/90">
+                  <span
+                    key={c}
+                    className="rounded-full border border-brand/30 bg-brand/5 px-2.5 py-0.5 text-[11px] text-brand/90"
+                  >
                     {c}
                   </span>
                 ))}
@@ -624,13 +859,25 @@ function Cases() {
             <span className="italic text-destructive">reales.</span>
           </h2>
           <p className="mt-5 text-muted-foreground sm:text-lg">
-            Hemos trabajado en soluciones empresariales de diferentes sectores, conectando software, datos y procesos. Presentamos los casos de forma anónima por confidencialidad.
+            Hemos trabajado en soluciones empresariales de diferentes sectores, conectando software,
+            datos y procesos. Presentamos los casos de forma anónima por confidencialidad.
           </p>
           <ul className="mt-8 space-y-3.5">
             {bullets.map((b) => (
               <li key={b} className="flex items-start gap-3 text-sm text-foreground/90">
                 <span className="mt-0.5 grid h-5 w-5 flex-none place-items-center rounded-full border border-brand/40 bg-brand/10 text-brand">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                  <svg
+                    width="11"
+                    height="11"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M20 6L9 17l-5-5" />
+                  </svg>
                 </span>
                 {b}
               </li>
@@ -647,16 +894,17 @@ function Cases() {
               delay={i * 90}
               className="group relative rounded-2xl border border-white/10 bg-surface/40 p-6 sm:p-7 transition-all hover:border-brand/40 hover:bg-surface/60"
             >
-              <span aria-hidden className="absolute left-0 top-6 h-8 w-[3px] rounded-r bg-brand opacity-0 transition-opacity group-hover:opacity-100" />
+              <span
+                aria-hidden
+                className="absolute left-0 top-6 h-8 w-[3px] rounded-r bg-brand opacity-0 transition-opacity group-hover:opacity-100"
+              />
               <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand">
                 {c.tag}
               </div>
               <h3 className="mt-2 font-display text-xl font-semibold leading-snug sm:text-2xl">
                 {c.t}
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                {c.s}
-              </p>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{c.s}</p>
               <p className="mt-4 text-xs text-foreground/60">
                 <span className="text-muted-foreground">Efecto operativo · </span>
                 {c.e}
@@ -671,9 +919,21 @@ function Cases() {
 
 function Methodology() {
   const steps = [
-    { n: "01", t: "Entendemos", d: "Conversamos el proceso real, sus cuellos de botella y qué éxito significa para tu equipo." },
-    { n: "02", t: "Diseñamos por fases", d: "Definimos un alcance por etapas con entregas útiles y decisiones claras en cada paso." },
-    { n: "03", t: "Construimos y acompañamos", d: "Desarrollamos, integramos y quedamos disponibles para evolucionar la solución contigo." },
+    {
+      n: "01",
+      t: "Entendemos",
+      d: "Conversamos el proceso real, sus cuellos de botella y qué éxito significa para tu equipo.",
+    },
+    {
+      n: "02",
+      t: "Diseñamos por fases",
+      d: "Definimos un alcance por etapas con entregas útiles y decisiones claras en cada paso.",
+    },
+    {
+      n: "03",
+      t: "Construimos y acompañamos",
+      d: "Desarrollamos, integramos y quedamos disponibles para evolucionar la solución contigo.",
+    },
   ];
   return (
     <section id="metodologia" className="border-y border-white/5 bg-surface/30">
@@ -693,7 +953,9 @@ function Methodology() {
               className="card-elevated p-6 tilt-hover tilt-hover-active"
             >
               <div className="flex items-baseline justify-between">
-                <span className="font-display text-3xl font-semibold text-gradient-animated">{s.n}</span>
+                <span className="font-display text-3xl font-semibold text-gradient-animated">
+                  {s.n}
+                </span>
                 <span className="h-px flex-1 mx-4 bg-gradient-to-r from-brand/50 via-white/10 to-transparent" />
               </div>
               <h3 className="mt-4 font-display text-lg font-semibold">{s.t}</h3>
@@ -701,7 +963,6 @@ function Methodology() {
             </Reveal>
           ))}
         </ol>
-
       </div>
     </section>
   );
@@ -712,12 +973,15 @@ function About() {
     <section id="sobre" className="mx-auto max-w-7xl px-5 py-20">
       <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.2fr]">
         <div className="relative">
-          <div aria-hidden className="absolute inset-0 -z-10 rounded-3xl bg-brand-gradient/25 blur-3xl" />
+          <div
+            aria-hidden
+            className="absolute inset-0 -z-10 rounded-3xl bg-brand-gradient/25 blur-3xl"
+          />
           <div className="card-elevated relative overflow-hidden">
             <div className="aspect-[4/5] w-full">
-              <img 
-                src="/Tara.png" 
-                alt="Tara Campos Padilla - Ingeniera de software" 
+              <img
+                src="/Tara.png"
+                alt="Tara Campos Padilla - Ingeniera de software"
                 className="h-full w-full object-cover"
               />
             </div>
@@ -733,9 +997,10 @@ function About() {
             Hablas directamente con quien diseña y construye tu solución.
           </h2>
           <p className="mt-4 text-muted-foreground">
-            Alianza F1 está dirigida por Tara Campos Padilla, ingeniera y desarrolladora de software con más de
-            15 años de experiencia creando y evolucionando sistemas empresariales. Sin intermediarios,
-            sin traducciones entre áreas: una interlocutora técnica y comercial que entiende tu negocio.
+            Alianza F1 está dirigida por Tara Campos Padilla, ingeniera y desarrolladora de software
+            con más de 15 años de experiencia creando y evolucionando sistemas empresariales. Sin
+            intermediarios, sin traducciones entre áreas: una interlocutora técnica y comercial que
+            entiende tu negocio.
           </p>
           <ul className="mt-6 grid gap-3 sm:grid-cols-2">
             {[
@@ -747,14 +1012,28 @@ function About() {
               "PostgreSQL, SQL Server, MySQL, APIs, cloud",
             ].map((i) => (
               <li key={i} className="flex items-start gap-2 text-sm">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0 text-brand"><path d="M20 6L9 17l-5-5"/></svg>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="mt-0.5 shrink-0 text-brand"
+                >
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
                 <span className="text-foreground/90">{i}</span>
               </li>
             ))}
           </ul>
           <div className="mt-8 flex flex-wrap gap-3">
             <PrimaryCTA>Conversemos por WhatsApp</PrimaryCTA>
-            <GhostCTA href="https://www.behance.net/IngTaraCampos">Ver portafolio en Behance</GhostCTA>
+            <GhostCTA href="https://www.behance.net/IngTaraCampos">
+              Ver portafolio en Behance
+            </GhostCTA>
           </div>
         </div>
       </div>
@@ -764,11 +1043,23 @@ function About() {
 
 /* ---------- Contact form ---------- */
 
-type FormData = { nombre: string; empresa: string; contacto: string; tipo: string; descripcion: string };
+type FormData = {
+  nombre: string;
+  empresa: string;
+  contacto: string;
+  tipo: string;
+  descripcion: string;
+};
 type Errors = Partial<Record<keyof FormData, string>>;
 
 function ContactForm() {
-  const [data, setData] = useState<FormData>({ nombre: "", empresa: "", contacto: "", tipo: "", descripcion: "" });
+  const [data, setData] = useState<FormData>({
+    nombre: "",
+    empresa: "",
+    contacto: "",
+    tipo: "",
+    descripcion: "",
+  });
   const [errors, setErrors] = useState<Errors>({});
 
   function update<K extends keyof FormData>(k: K, v: string) {
@@ -783,7 +1074,8 @@ function ContactForm() {
     if (!data.contacto.trim()) e.contacto = "Déjanos un WhatsApp o correo.";
     else if (data.contacto.length > 120) e.contacto = "Máximo 120 caracteres.";
     if (!data.tipo) e.tipo = "Elige una opción.";
-    if (!data.descripcion.trim() || data.descripcion.trim().length < 10) e.descripcion = "Cuéntanos un poco más (mínimo 10 caracteres).";
+    if (!data.descripcion.trim() || data.descripcion.trim().length < 10)
+      e.descripcion = "Cuéntanos un poco más (mínimo 10 caracteres).";
     if (data.descripcion.length > 1000) e.descripcion = "Máximo 1000 caracteres.";
     if (data.empresa.length > 120) e.empresa = "Máximo 120 caracteres.";
     setErrors(e);
@@ -807,23 +1099,52 @@ function ContactForm() {
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <Label htmlFor="nombre">Nombre</Label>
-          <Input id="nombre" value={data.nombre} onChange={(e) => update("nombre", e.target.value)} maxLength={100} aria-invalid={!!errors.nombre} className="mt-1.5 bg-white/[0.03]" placeholder="Tu nombre" />
+          <Input
+            id="nombre"
+            value={data.nombre}
+            onChange={(e) => update("nombre", e.target.value)}
+            maxLength={100}
+            aria-invalid={!!errors.nombre}
+            className="mt-1.5 bg-white/[0.03]"
+            placeholder="Tu nombre"
+          />
           {errors.nombre && <p className="mt-1 text-xs text-destructive">{errors.nombre}</p>}
         </div>
         <div>
-          <Label htmlFor="empresa">Empresa <span className="text-muted-foreground">(opcional)</span></Label>
-          <Input id="empresa" value={data.empresa} onChange={(e) => update("empresa", e.target.value)} maxLength={120} className="mt-1.5 bg-white/[0.03]" placeholder="Nombre de tu empresa" />
+          <Label htmlFor="empresa">
+            Empresa <span className="text-muted-foreground">(opcional)</span>
+          </Label>
+          <Input
+            id="empresa"
+            value={data.empresa}
+            onChange={(e) => update("empresa", e.target.value)}
+            maxLength={120}
+            className="mt-1.5 bg-white/[0.03]"
+            placeholder="Nombre de tu empresa"
+          />
           {errors.empresa && <p className="mt-1 text-xs text-destructive">{errors.empresa}</p>}
         </div>
         <div>
           <Label htmlFor="contacto">WhatsApp o correo</Label>
-          <Input id="contacto" value={data.contacto} onChange={(e) => update("contacto", e.target.value)} maxLength={120} aria-invalid={!!errors.contacto} className="mt-1.5 bg-white/[0.03]" placeholder="+57 300 000 0000 o tu@correo.com" />
+          <Input
+            id="contacto"
+            value={data.contacto}
+            onChange={(e) => update("contacto", e.target.value)}
+            maxLength={120}
+            aria-invalid={!!errors.contacto}
+            className="mt-1.5 bg-white/[0.03]"
+            placeholder="+57 300 000 0000 o tu@correo.com"
+          />
           {errors.contacto && <p className="mt-1 text-xs text-destructive">{errors.contacto}</p>}
         </div>
         <div>
           <Label htmlFor="tipo">Tipo de solución</Label>
           <Select value={data.tipo} onValueChange={(v) => update("tipo", v)}>
-            <SelectTrigger id="tipo" aria-invalid={!!errors.tipo} className="mt-1.5 bg-white/[0.03]">
+            <SelectTrigger
+              id="tipo"
+              aria-invalid={!!errors.tipo}
+              className="mt-1.5 bg-white/[0.03]"
+            >
               <SelectValue placeholder="Selecciona una opción" />
             </SelectTrigger>
             <SelectContent>
@@ -838,20 +1159,51 @@ function ContactForm() {
         </div>
         <div className="sm:col-span-2">
           <Label htmlFor="descripcion">Cuéntanos brevemente</Label>
-          <Textarea id="descripcion" value={data.descripcion} onChange={(e) => update("descripcion", e.target.value)} maxLength={1000} aria-invalid={!!errors.descripcion} rows={4} className="mt-1.5 bg-white/[0.03]" placeholder="¿Qué proceso te gustaría mejorar o qué necesitas construir?" />
+          <Textarea
+            id="descripcion"
+            value={data.descripcion}
+            onChange={(e) => update("descripcion", e.target.value)}
+            maxLength={1000}
+            aria-invalid={!!errors.descripcion}
+            rows={4}
+            className="mt-1.5 bg-white/[0.03]"
+            placeholder="¿Qué proceso te gustaría mejorar o qué necesitas construir?"
+          />
           <div className="mt-1 flex items-center justify-between">
-            {errors.descripcion ? <p className="text-xs text-destructive">{errors.descripcion}</p> : <span />}
-            <span className="text-[11px] text-muted-foreground">{data.descripcion.length}/1000</span>
+            {errors.descripcion ? (
+              <p className="text-xs text-destructive">{errors.descripcion}</p>
+            ) : (
+              <span />
+            )}
+            <span className="text-[11px] text-muted-foreground">
+              {data.descripcion.length}/1000
+            </span>
           </div>
         </div>
       </div>
       <div className="mt-6 flex flex-wrap items-center gap-3">
-        <button type="submit" className="inline-flex items-center gap-2 rounded-xl btn-whatsapp btn-whatsapp-hover px-5 py-3 text-sm font-semibold">
+        <button
+          type="submit"
+          className="inline-flex items-center gap-2 rounded-xl btn-whatsapp btn-whatsapp-hover px-5 py-3 text-sm font-semibold"
+        >
           <img src="/whatsapp.svg" alt="WhatsApp" className="h-4 w-4" />
           Enviar por WhatsApp
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg>
         </button>
-        <span className="text-xs text-muted-foreground">Se abrirá una conversación con la información ingresada.</span>
+        <span className="text-xs text-muted-foreground">
+          Se abrirá una conversación con la información ingresada.
+        </span>
       </div>
     </form>
   );
@@ -868,8 +1220,8 @@ function CTAContact() {
             Empecemos por entender tu proceso.
           </h2>
           <p className="mt-4 max-w-lg text-muted-foreground">
-            La evaluación inicial es sin compromiso. Te devolvemos una lectura clara del alcance, riesgos y
-            posibles fases del proyecto.
+            La evaluación inicial es sin compromiso. Te devolvemos una lectura clara del alcance,
+            riesgos y posibles fases del proyecto.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <PrimaryCTA>Escribir por WhatsApp</PrimaryCTA>
@@ -884,12 +1236,30 @@ function CTAContact() {
 
 function FAQ() {
   const faqs = [
-    { q: "¿Trabajan proyectos nuevos y también sistemas existentes?", a: "Sí. Diseñamos plataformas desde cero y también evolucionamos, modernizamos o mantenemos sistemas ya en producción, incluidos sistemas legacy." },
-    { q: "¿Se puede avanzar por fases?", a: "Sí. Preferimos entregas por fases con alcance acotado, para que el negocio empiece a usar la solución rápido y podamos ajustar según feedback real." },
-    { q: "¿De quién es el código fuente?", a: "Del cliente cuando corresponde. Entregamos código fuente y control de versiones para que la solución esté siempre bajo tu control." },
-    { q: "¿Atienden en toda Latinoamérica?", a: "Sí. Trabajamos de forma remota con equipos en distintos países de la región, con reuniones y seguimiento en horarios coordinados." },
-    { q: "¿Cómo es la evaluación inicial?", a: "Es una conversación sin compromiso donde entendemos el proceso, revisamos lo existente y devolvemos una lectura clara del alcance y las fases sugeridas." },
-    { q: "¿Manejan integraciones con WhatsApp y pagos?", a: "Sí. Somos proveedora tecnológica autorizada de Meta para soluciones de WhatsApp e integramos pasarelas de pagos y APIs de terceros." },
+    {
+      q: "¿Trabajan proyectos nuevos y también sistemas existentes?",
+      a: "Sí. Diseñamos plataformas desde cero y también evolucionamos, modernizamos o mantenemos sistemas ya en producción, incluidos sistemas legacy.",
+    },
+    {
+      q: "¿Se puede avanzar por fases?",
+      a: "Sí. Preferimos entregas por fases con alcance acotado, para que el negocio empiece a usar la solución rápido y podamos ajustar según feedback real.",
+    },
+    {
+      q: "¿De quién es el código fuente?",
+      a: "Del cliente cuando corresponde. Entregamos código fuente y control de versiones para que la solución esté siempre bajo tu control.",
+    },
+    {
+      q: "¿Atienden en toda Latinoamérica?",
+      a: "Sí. Trabajamos de forma remota con equipos en distintos países de la región, con reuniones y seguimiento en horarios coordinados.",
+    },
+    {
+      q: "¿Cómo es la evaluación inicial?",
+      a: "Es una conversación sin compromiso donde entendemos el proceso, revisamos lo existente y devolvemos una lectura clara del alcance y las fases sugeridas.",
+    },
+    {
+      q: "¿Manejan integraciones con WhatsApp y pagos?",
+      a: "Sí. Somos proveedora tecnológica autorizada de Meta para soluciones de WhatsApp e integramos pasarelas de pagos y APIs de terceros.",
+    },
   ];
   return (
     <section id="faq" className="mx-auto max-w-4xl px-5 py-20">
@@ -919,34 +1289,90 @@ function Footer() {
       <div className="mx-auto grid max-w-7xl gap-8 px-5 py-12 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <div className="flex items-center gap-2">
-            <span aria-hidden className="grid h-8 w-8 place-items-center rounded-lg bg-brand-gradient text-[10px] font-bold text-white">A/F1</span>
-            <span className="font-display text-lg font-semibold">Alianza <span className="text-gradient">F1</span></span>
+            <span
+              aria-hidden
+              className="grid h-8 w-8 place-items-center rounded-lg bg-brand-gradient text-[10px] font-bold text-white"
+            >
+              A/F1
+            </span>
+            <span className="font-display text-lg font-semibold">
+              Alianza <span className="text-gradient">F1</span>
+            </span>
           </div>
           <p className="mt-3 max-w-xs text-sm text-muted-foreground">
-            Software empresarial a medida, automatización e integraciones. Acompañamiento directo desde Colombia
-            para toda Latinoamérica.
+            Software empresarial a medida, automatización e integraciones. Acompañamiento directo
+            desde Colombia para toda Latinoamérica.
           </p>
         </div>
         <div>
-          <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Navegación</h3>
+          <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+            Navegación
+          </h3>
           <ul className="mt-4 space-y-2 text-sm">
-            <li><a className="hover:text-foreground text-muted-foreground" href="#soluciones">Soluciones</a></li>
-            <li><a className="hover:text-foreground text-muted-foreground" href="#casos">Casos</a></li>
-            <li><a className="hover:text-foreground text-muted-foreground" href="#metodologia">Metodología</a></li>
-            <li><a className="hover:text-foreground text-muted-foreground" href="#faq">Preguntas</a></li>
+            <li>
+              <a className="hover:text-foreground text-muted-foreground" href="#soluciones">
+                Soluciones
+              </a>
+            </li>
+            <li>
+              <a className="hover:text-foreground text-muted-foreground" href="#casos">
+                Casos
+              </a>
+            </li>
+            <li>
+              <a className="hover:text-foreground text-muted-foreground" href="#metodologia">
+                Metodología
+              </a>
+            </li>
+            <li>
+              <a className="hover:text-foreground text-muted-foreground" href="#faq">
+                Preguntas
+              </a>
+            </li>
           </ul>
         </div>
         <div>
-          <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Contacto</h3>
+          <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+            Contacto
+          </h3>
           <ul className="mt-4 space-y-2 text-sm">
-            <li><a className="hover:text-foreground text-muted-foreground" href="mailto:tarapadilla90@gmail.com">tarapadilla90@gmail.com</a></li>
-            <li><a className="hover:text-foreground text-muted-foreground" href={waUrl()} target="_blank" rel="noreferrer">WhatsApp +57 302 567 3434</a></li>
-            <li><a className="hover:text-foreground text-muted-foreground" href="https://www.behance.net/IngTaraCampos" target="_blank" rel="noreferrer">Behance / IngTaraCampos</a></li>
+            <li>
+              <a
+                className="hover:text-foreground text-muted-foreground"
+                href="mailto:tarapadilla90@gmail.com"
+              >
+                tarapadilla90@gmail.com
+              </a>
+            </li>
+            <li>
+              <a
+                className="hover:text-foreground text-muted-foreground"
+                href={waUrl()}
+                target="_blank"
+                rel="noreferrer"
+              >
+                WhatsApp +57 302 567 3434
+              </a>
+            </li>
+            <li>
+              <a
+                className="hover:text-foreground text-muted-foreground"
+                href="https://www.behance.net/IngTaraCampos"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Behance / IngTaraCampos
+              </a>
+            </li>
           </ul>
         </div>
         <div>
-          <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Ubicación</h3>
-          <p className="mt-4 text-sm text-muted-foreground">Colombia · Atención remota en toda Latinoamérica.</p>
+          <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+            Ubicación
+          </h3>
+          <p className="mt-4 text-sm text-muted-foreground">
+            Colombia · Atención remota en toda Latinoamérica.
+          </p>
         </div>
       </div>
       <div className="border-t border-white/5">
@@ -981,7 +1407,12 @@ function FloatingWhatsApp() {
 function LandingPage() {
   return (
     <div className="min-h-screen">
-      <a href="#top" className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[60] focus:rounded-md focus:bg-brand focus:px-3 focus:py-2 focus:text-primary-foreground">Saltar al contenido</a>
+      <a
+        href="#top"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[60] focus:rounded-md focus:bg-brand focus:px-3 focus:py-2 focus:text-primary-foreground"
+      >
+        Saltar al contenido
+      </a>
       <Header />
       <main>
         <Hero />

@@ -52,7 +52,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
-            onClick={() => { router.invalidate(); reset(); }}
+            onClick={() => {
+              router.invalidate();
+              reset();
+            }}
             className="inline-flex items-center justify-center rounded-md btn-primary btn-primary-hover px-4 py-2 text-sm font-medium"
           >
             Intentar de nuevo
@@ -96,7 +99,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { name: "author", content: "Alianza F1 — Tara Campos Padilla" },
       { name: "theme-color", content: "#0b1020" },
-      { property: "og:title", content: "Alianza F1— Software empresarial a medida, automatización e integraciones" },
+      {
+        property: "og:title",
+        content: "Alianza F1— Software empresarial a medida, automatización e integraciones",
+      },
       {
         property: "og:description",
         content:
@@ -106,10 +112,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:site_name", content: "Alianza F1" },
       { property: "og:locale", content: "es_LA" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Alianza F1— Software empresarial a medida, automatización e integraciones" },
-      { name: "twitter:description", content: "Plataformas empresariales, automatización con IA e integraciones para pymes y empresas en Latinoamérica. Acompañamiento directo de la ingeniera Tara Campos." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/d195952b-93bd-45fc-b104-e343ea6fd993" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/d195952b-93bd-45fc-b104-e343ea6fd993" },
+      {
+        name: "twitter:title",
+        content: "Alianza F1— Software empresarial a medida, automatización e integraciones",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Plataformas empresariales, automatización con IA e integraciones para pymes y empresas en Latinoamérica. Acompañamiento directo de la ingeniera Tara Campos.",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/d195952b-93bd-45fc-b104-e343ea6fd993",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/d195952b-93bd-45fc-b104-e343ea6fd993",
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -120,9 +141,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap",
       },
     ],
-    scripts: [
-      { type: "application/ld+json", children: JSON.stringify(orgJsonLd) },
-    ],
+    scripts: [{ type: "application/ld+json", children: JSON.stringify(orgJsonLd) }],
   }),
   shellComponent: RootShell,
   component: RootComponent,
