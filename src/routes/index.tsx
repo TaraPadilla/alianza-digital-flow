@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
+  createElement,
   useEffect,
   useRef,
   useState,
@@ -61,15 +62,14 @@ function Reveal({
     return () => io.disconnect();
   }, []);
   const style: CSSProperties = { transitionDelay: `${delay}ms` };
-  const AnyTag = Tag as any;
-  return (
-    <AnyTag
-      ref={ref as any}
-      style={style}
-      className={`reveal ${visible ? "reveal-in" : ""} ${className}`}
-    >
-      {children}
-    </AnyTag>
+  return createElement(
+    Tag,
+    {
+      ref,
+      style,
+      className: `reveal ${visible ? "reveal-in" : ""} ${className}`,
+    },
+    children,
   );
 }
 
