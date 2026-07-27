@@ -184,7 +184,7 @@ function Header() {
               <span className="text-gradient">Web & Móvil</span>
             </span>
             <span
-              className={`text-base text-muted-foreground hidden sm:block transition-all duration-300 ${scrolled ? "opacity-0 h-0" : "opacity-100"}`}
+              className={`text-xs text-muted-foreground hidden sm:block transition-all duration-300 ${scrolled ? "opacity-0 h-0" : "opacity-100"}`}
             >
               Transformando ideas en soluciones digitales innovadoras y eficientes.
             </span>
