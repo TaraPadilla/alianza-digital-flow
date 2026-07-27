@@ -36,3 +36,14 @@ jobs:
           tags: |
             ghcr.io/tarapadilla/alianza-digital-flow:latest
             ghcr.io/tarapadilla/alianza-digital-flow:${{ github.sha }}
+      - name: Desplegar en OCI
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.OCI_HOST }}
+          username: ${{ secrets.OCI_USER }}
+          key: ${{ secrets.OCI_SSH_KEY }}
+          script: |
+            cd /home/opc/Proyectos/Landing
+            docker compose pull
+            docker compose up -d
+            docker image prune -f
