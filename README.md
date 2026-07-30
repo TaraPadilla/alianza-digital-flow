@@ -200,6 +200,7 @@ Landing/
 │   ├── hooks/                      # Hooks compartidos
 │   ├── lib/
 │   │   ├── site-content.ts         # Catálogo y contenido estructurado
+│   │   ├── site-urls.ts            # URLs públicas centralizadas
 │   │   ├── utils.ts                # Utilidad cn() para clases CSS
 │   │   └── error-*.ts              # Captura y presentación de errores SSR
 │   ├── routes/
@@ -420,21 +421,30 @@ principal están disponibles sin depender de la hidratación del cliente.
 
 ## Integraciones y enlaces externos
 
-Actualmente no se requieren variables de entorno. Los destinos están configurados directamente en
-los siguientes componentes:
+Actualmente no se requieren variables de entorno. Las URLs públicas del agente y del blog están
+centralizadas en `src/lib/site-urls.ts`:
 
-| Destino           | Ubicación principal                                                         |
-| ----------------- | --------------------------------------------------------------------------- |
-| Agente público    | `src/routes/agente-ia.tsx`, `src/components/enterprise-agent-card.tsx`      |
-| Blog              | `src/components/technology-blog-card.tsx`, `src/components/site-chrome.tsx` |
-| WhatsApp          | `src/components/site-chrome.tsx`, `src/routes/index.tsx`                    |
-| Correo            | `src/components/site-chrome.tsx`, `src/routes/index.tsx`                    |
-| Behance           | `src/routes/index.tsx`, metadata institucional                              |
-| Imagen Open Graph | `src/routes/__root.tsx`                                                     |
+```ts
+export const PUBLIC_AGENT_URL = "https://agente.tecnologiaydesarrolloweb.com/";
+export const BLOG_URL = "https://blog.tecnologiadesarrolloweb.com/";
+```
 
-Si estos destinos van a variar por ambiente, deben moverse a un módulo de configuración tipado o a
-variables `VITE_*` documentadas en un archivo `.env.example`. Nunca deben almacenarse secretos en
-variables expuestas al cliente.
+Los componentes deben importar estas constantes en lugar de repetir las direcciones. De esta forma,
+cualquier cambio de dominio se realiza una sola vez y todos los CTA permanecen consistentes. Los
+enlaces externos deben abrirse en una pestaña nueva con `target="_blank"` y
+`rel="noopener noreferrer"`.
+
+| Destino           | Ubicación principal                                      |
+| ----------------- | -------------------------------------------------------- |
+| Agente público    | `src/lib/site-urls.ts` mediante `PUBLIC_AGENT_URL`       |
+| Blog              | `src/lib/site-urls.ts` mediante `BLOG_URL`               |
+| WhatsApp          | `src/components/site-chrome.tsx`, `src/routes/index.tsx` |
+| Correo            | `src/components/site-chrome.tsx`, `src/routes/index.tsx` |
+| Behance           | `src/routes/index.tsx`, metadata institucional           |
+| Imagen Open Graph | `src/routes/__root.tsx`                                  |
+
+Si estos destinos van a variar por ambiente, deben moverse a variables `VITE_*` documentadas en un
+archivo `.env.example`. Nunca deben almacenarse secretos en variables expuestas al cliente.
 
 ## SSR y manejo de errores
 
