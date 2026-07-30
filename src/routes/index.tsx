@@ -26,6 +26,9 @@ import {
 } from "@/components/ui/select";
 import { EnterpriseAgentCard } from "@/components/enterprise-agent-card";
 import { TechnologyBlogCard } from "@/components/technology-blog-card";
+import { ServiceIcon } from "@/components/service-detail-page";
+import { BrandCTA, MarketingLayout } from "@/components/site-chrome";
+import { serviceCatalog } from "@/lib/site-content";
 
 /* ---------- Scroll reveal ---------- */
 function Reveal({
@@ -433,28 +436,28 @@ function Hero() {
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 pb-20 pt-16 lg:grid-cols-[1.05fr_1fr] lg:pt-24">
         <div className="animate-fade-up">
-          <SectionEyebrow>Software empresarial a medida</SectionEyebrow>
+          <SectionEyebrow>Agente IA empresarial · Software a medida</SectionEyebrow>
           <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
-            Tecnología que se <span className="text-gradient-animated">adapta a tu negocio</span>,
-            no al contrario.
+            El conocimiento de tu empresa, convertido en{" "}
+            <span className="text-gradient-animated">respuestas y sistemas útiles.</span>
           </h1>
           <p className="mt-5 max-w-xl text-base text-muted-foreground sm:text-lg">
-            Diseñamos plataformas empresariales, automatizaciones e integraciones que eliminan
-            tareas manuales y convierten tus procesos en sistemas eficientes.
+            Nuestro agente de IA responde con información autorizada y fuentes visibles. Además,
+            construimos software empresarial, automatizaciones e integraciones a medida.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <PrimaryCTA>Cuéntame tu proyecto</PrimaryCTA>
-            <GhostCTA href="#soluciones">Ver soluciones</GhostCTA>
+            <PrimaryCTA href="/agente-ia">Conocer el agente IA</PrimaryCTA>
+            <GhostCTA href="/servicios">Ver todos los servicios</GhostCTA>
           </div>
           <p className="mt-3 text-xs text-muted-foreground">
-            Evaluación inicial sin compromiso · Respuesta directa por WhatsApp.
+            Prueba pública disponible · Soluciones empresariales configurables.
           </p>
 
           <dl className="mt-10 grid max-w-lg grid-cols-3 gap-4">
             {[
+              { k: "RAG", l: "respuestas con fuentes" },
               { k: "+15", l: "años en software empresarial" },
               { k: "1:1", l: "acompañamiento directo" },
-              { k: "LATAM", l: "atención remota" },
             ].map((s, i) => (
               <div
                 key={s.l}
@@ -523,12 +526,12 @@ function BlogBanner() {
     <section className="mx-auto max-w-7xl px-5 py-12">
       <div className="grid gap-8 lg:grid-cols-2">
         {/* Technology Blog */}
-        <Reveal className="h-full">
+        <Reveal className="order-2 h-full">
           <TechnologyBlogCard />
         </Reveal>
 
         {/* Enterprise AI Agent */}
-        <Reveal className="h-full">
+        <Reveal className="order-1 h-full">
           <EnterpriseAgentCard />
         </Reveal>
       </div>
@@ -596,7 +599,7 @@ function Pains() {
   );
 }
 
-function Services() {
+function LegacyServices() {
   const services = [
     {
       t: "Plataformas web empresariales",
@@ -725,6 +728,69 @@ function Services() {
                   </span>
                 ))}
               </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Services() {
+  return (
+    <section id="soluciones" className="relative border-y border-white/5 bg-surface/30">
+      <div className="mx-auto max-w-7xl px-5 py-20">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <div className="max-w-3xl">
+            <SectionEyebrow>Ecosistema de servicios</SectionEyebrow>
+            <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
+              Todo lo necesario para conectar procesos, información y tecnología.
+            </h2>
+            <p className="mt-3 max-w-2xl text-muted-foreground">
+              El agente es nuestro producto insignia. Estas seis líneas permiten integrarlo,
+              construir sistemas alrededor de él o resolver otras necesidades empresariales.
+            </p>
+          </div>
+          <BrandCTA href="/servicios" secondary>
+            Explorar todos los servicios
+          </BrandCTA>
+        </div>
+
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {serviceCatalog.map((service, index) => (
+            <Reveal
+              key={service.slug}
+              as="article"
+              delay={index * 70}
+              className="group card-elevated relative flex min-h-72 flex-col p-6 tilt-hover tilt-hover-active hover:border-brand/30"
+            >
+              <span className="absolute right-5 top-5 font-mono text-xs text-muted-foreground">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span className="grid h-11 w-11 place-items-center rounded-xl border border-brand/30 bg-brand/10 text-brand">
+                <ServiceIcon name={service.icon} />
+              </span>
+              <h3 className="mt-6 font-display text-xl font-semibold">{service.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                {service.summary}
+              </p>
+              <a
+                href={`/servicios/${service.slug}`}
+                className="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-semibold text-brand transition group-hover:text-foreground"
+              >
+                Conocer servicio
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M13 5l7 7-7 7" />
+                </svg>
+              </a>
             </Reveal>
           ))}
         </div>
@@ -1330,28 +1396,17 @@ function FloatingWhatsApp() {
 
 function LandingPage() {
   return (
-    <div className="min-h-screen">
-      <a
-        href="#top"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[60] focus:rounded-md focus:bg-brand focus:px-3 focus:py-2 focus:text-primary-foreground"
-      >
-        Saltar al contenido
-      </a>
-      <Header />
-      <main>
-        <Hero />
-        <TrustStrip />
-        <BlogBanner />
-        <Pains />
-        <Services />
-        <Cases />
-        <Methodology />
-        <About />
-        <CTAContact />
-        <FAQ />
-      </main>
-      <Footer />
-      <FloatingWhatsApp />
-    </div>
+    <MarketingLayout>
+      <Hero />
+      <TrustStrip />
+      <BlogBanner />
+      <Pains />
+      <Services />
+      <Cases />
+      <Methodology />
+      <About />
+      <CTAContact />
+      <FAQ />
+    </MarketingLayout>
   );
 }

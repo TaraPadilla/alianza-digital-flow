@@ -10,33 +10,184 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AgenteIaRouteImport } from './routes/agente-ia'
+import { Route as CasosRouteImport } from './routes/casos'
+import { Route as MetodologiaRouteImport } from './routes/metodologia'
+import { Route as NosotrosRouteImport } from './routes/nosotros'
+import { Route as ServiciosIndexRouteImport } from './routes/servicios/index'
+import { Route as ServiciosAutomatizacionIaRouteImport } from './routes/servicios/automatizacion-ia'
+import { Route as ServiciosEvolucionLegacyRouteImport } from './routes/servicios/evolucion-legacy'
+import { Route as ServiciosInfraestructuraRouteImport } from './routes/servicios/infraestructura'
+import { Route as ServiciosIntegracionesRouteImport } from './routes/servicios/integraciones'
+import { Route as ServiciosSitiosWebRouteImport } from './routes/servicios/sitios-web'
+import { Route as ServiciosSoftwareEmpresarialRouteImport } from './routes/servicios/software-empresarial'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AgenteIaRoute = AgenteIaRouteImport.update({
+  id: '/agente-ia',
+  path: '/agente-ia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CasosRoute = CasosRouteImport.update({
+  id: '/casos',
+  path: '/casos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MetodologiaRoute = MetodologiaRouteImport.update({
+  id: '/metodologia',
+  path: '/metodologia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NosotrosRoute = NosotrosRouteImport.update({
+  id: '/nosotros',
+  path: '/nosotros',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServiciosIndexRoute = ServiciosIndexRouteImport.update({
+  id: '/servicios/',
+  path: '/servicios/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServiciosAutomatizacionIaRoute =
+  ServiciosAutomatizacionIaRouteImport.update({
+    id: '/servicios/automatizacion-ia',
+    path: '/servicios/automatizacion-ia',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServiciosEvolucionLegacyRoute =
+  ServiciosEvolucionLegacyRouteImport.update({
+    id: '/servicios/evolucion-legacy',
+    path: '/servicios/evolucion-legacy',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServiciosInfraestructuraRoute =
+  ServiciosInfraestructuraRouteImport.update({
+    id: '/servicios/infraestructura',
+    path: '/servicios/infraestructura',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServiciosIntegracionesRoute = ServiciosIntegracionesRouteImport.update({
+  id: '/servicios/integraciones',
+  path: '/servicios/integraciones',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServiciosSitiosWebRoute = ServiciosSitiosWebRouteImport.update({
+  id: '/servicios/sitios-web',
+  path: '/servicios/sitios-web',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServiciosSoftwareEmpresarialRoute =
+  ServiciosSoftwareEmpresarialRouteImport.update({
+    id: '/servicios/software-empresarial',
+    path: '/servicios/software-empresarial',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/agente-ia': typeof AgenteIaRoute
+  '/casos': typeof CasosRoute
+  '/metodologia': typeof MetodologiaRoute
+  '/nosotros': typeof NosotrosRoute
+  '/servicios/automatizacion-ia': typeof ServiciosAutomatizacionIaRoute
+  '/servicios/evolucion-legacy': typeof ServiciosEvolucionLegacyRoute
+  '/servicios/infraestructura': typeof ServiciosInfraestructuraRoute
+  '/servicios/integraciones': typeof ServiciosIntegracionesRoute
+  '/servicios/sitios-web': typeof ServiciosSitiosWebRoute
+  '/servicios/software-empresarial': typeof ServiciosSoftwareEmpresarialRoute
+  '/servicios/': typeof ServiciosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/agente-ia': typeof AgenteIaRoute
+  '/casos': typeof CasosRoute
+  '/metodologia': typeof MetodologiaRoute
+  '/nosotros': typeof NosotrosRoute
+  '/servicios/automatizacion-ia': typeof ServiciosAutomatizacionIaRoute
+  '/servicios/evolucion-legacy': typeof ServiciosEvolucionLegacyRoute
+  '/servicios/infraestructura': typeof ServiciosInfraestructuraRoute
+  '/servicios/integraciones': typeof ServiciosIntegracionesRoute
+  '/servicios/sitios-web': typeof ServiciosSitiosWebRoute
+  '/servicios/software-empresarial': typeof ServiciosSoftwareEmpresarialRoute
+  '/servicios': typeof ServiciosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/agente-ia': typeof AgenteIaRoute
+  '/casos': typeof CasosRoute
+  '/metodologia': typeof MetodologiaRoute
+  '/nosotros': typeof NosotrosRoute
+  '/servicios/automatizacion-ia': typeof ServiciosAutomatizacionIaRoute
+  '/servicios/evolucion-legacy': typeof ServiciosEvolucionLegacyRoute
+  '/servicios/infraestructura': typeof ServiciosInfraestructuraRoute
+  '/servicios/integraciones': typeof ServiciosIntegracionesRoute
+  '/servicios/sitios-web': typeof ServiciosSitiosWebRoute
+  '/servicios/software-empresarial': typeof ServiciosSoftwareEmpresarialRoute
+  '/servicios/': typeof ServiciosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/agente-ia'
+    | '/casos'
+    | '/metodologia'
+    | '/nosotros'
+    | '/servicios/automatizacion-ia'
+    | '/servicios/evolucion-legacy'
+    | '/servicios/infraestructura'
+    | '/servicios/integraciones'
+    | '/servicios/sitios-web'
+    | '/servicios/software-empresarial'
+    | '/servicios/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/agente-ia'
+    | '/casos'
+    | '/metodologia'
+    | '/nosotros'
+    | '/servicios/automatizacion-ia'
+    | '/servicios/evolucion-legacy'
+    | '/servicios/infraestructura'
+    | '/servicios/integraciones'
+    | '/servicios/sitios-web'
+    | '/servicios/software-empresarial'
+    | '/servicios'
+  id:
+    | '__root__'
+    | '/'
+    | '/agente-ia'
+    | '/casos'
+    | '/metodologia'
+    | '/nosotros'
+    | '/servicios/automatizacion-ia'
+    | '/servicios/evolucion-legacy'
+    | '/servicios/infraestructura'
+    | '/servicios/integraciones'
+    | '/servicios/sitios-web'
+    | '/servicios/software-empresarial'
+    | '/servicios/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AgenteIaRoute: typeof AgenteIaRoute
+  CasosRoute: typeof CasosRoute
+  MetodologiaRoute: typeof MetodologiaRoute
+  NosotrosRoute: typeof NosotrosRoute
+  ServiciosAutomatizacionIaRoute: typeof ServiciosAutomatizacionIaRoute
+  ServiciosEvolucionLegacyRoute: typeof ServiciosEvolucionLegacyRoute
+  ServiciosInfraestructuraRoute: typeof ServiciosInfraestructuraRoute
+  ServiciosIntegracionesRoute: typeof ServiciosIntegracionesRoute
+  ServiciosSitiosWebRoute: typeof ServiciosSitiosWebRoute
+  ServiciosSoftwareEmpresarialRoute: typeof ServiciosSoftwareEmpresarialRoute
+  ServiciosIndexRoute: typeof ServiciosIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +199,99 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/agente-ia': {
+      id: '/agente-ia'
+      path: '/agente-ia'
+      fullPath: '/agente-ia'
+      preLoaderRoute: typeof AgenteIaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/casos': {
+      id: '/casos'
+      path: '/casos'
+      fullPath: '/casos'
+      preLoaderRoute: typeof CasosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/metodologia': {
+      id: '/metodologia'
+      path: '/metodologia'
+      fullPath: '/metodologia'
+      preLoaderRoute: typeof MetodologiaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/nosotros': {
+      id: '/nosotros'
+      path: '/nosotros'
+      fullPath: '/nosotros'
+      preLoaderRoute: typeof NosotrosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicios/': {
+      id: '/servicios/'
+      path: '/servicios'
+      fullPath: '/servicios/'
+      preLoaderRoute: typeof ServiciosIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicios/automatizacion-ia': {
+      id: '/servicios/automatizacion-ia'
+      path: '/servicios/automatizacion-ia'
+      fullPath: '/servicios/automatizacion-ia'
+      preLoaderRoute: typeof ServiciosAutomatizacionIaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicios/evolucion-legacy': {
+      id: '/servicios/evolucion-legacy'
+      path: '/servicios/evolucion-legacy'
+      fullPath: '/servicios/evolucion-legacy'
+      preLoaderRoute: typeof ServiciosEvolucionLegacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicios/infraestructura': {
+      id: '/servicios/infraestructura'
+      path: '/servicios/infraestructura'
+      fullPath: '/servicios/infraestructura'
+      preLoaderRoute: typeof ServiciosInfraestructuraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicios/integraciones': {
+      id: '/servicios/integraciones'
+      path: '/servicios/integraciones'
+      fullPath: '/servicios/integraciones'
+      preLoaderRoute: typeof ServiciosIntegracionesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicios/sitios-web': {
+      id: '/servicios/sitios-web'
+      path: '/servicios/sitios-web'
+      fullPath: '/servicios/sitios-web'
+      preLoaderRoute: typeof ServiciosSitiosWebRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicios/software-empresarial': {
+      id: '/servicios/software-empresarial'
+      path: '/servicios/software-empresarial'
+      fullPath: '/servicios/software-empresarial'
+      preLoaderRoute: typeof ServiciosSoftwareEmpresarialRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AgenteIaRoute: AgenteIaRoute,
+  CasosRoute: CasosRoute,
+  MetodologiaRoute: MetodologiaRoute,
+  NosotrosRoute: NosotrosRoute,
+  ServiciosAutomatizacionIaRoute: ServiciosAutomatizacionIaRoute,
+  ServiciosEvolucionLegacyRoute: ServiciosEvolucionLegacyRoute,
+  ServiciosInfraestructuraRoute: ServiciosInfraestructuraRoute,
+  ServiciosIntegracionesRoute: ServiciosIntegracionesRoute,
+  ServiciosSitiosWebRoute: ServiciosSitiosWebRoute,
+  ServiciosSoftwareEmpresarialRoute: ServiciosSoftwareEmpresarialRoute,
+  ServiciosIndexRoute: ServiciosIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -77,7 +77,7 @@ const orgJsonLd = {
   "@type": "ProfessionalService",
   name: "Alianza F1",
   description:
-    "Alianza F1 diseña plataformas empresariales, automatizaciones e integraciones a medida para pymes y empresas en Latinoamérica.",
+    "Alianza F1 desarrolla un agente de IA empresarial con fuentes y diseña software, automatizaciones e integraciones a medida para empresas en Latinoamérica.",
   areaServed: "Latinoamérica",
   founder: { "@type": "Person", name: "Tara Campos Padilla", jobTitle: "Ingeniera de software" },
   email: "tarapadilla90@gmail.com",
@@ -91,22 +91,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Alianza F1— Software empresarial a medida, automatización e integraciones" },
+      { title: "Alianza F1 — Agente IA, software empresarial y automatización" },
       {
         name: "description",
         content:
-          "Plataformas empresariales, automatización con IA e integraciones para pymes y empresas en Latinoamérica. Acompañamiento directo de la ingeniera Tara Campos.",
+          "Agente de IA empresarial con fuentes, software a medida, automatización, integraciones y evolución tecnológica para empresas en Latinoamérica.",
       },
       { name: "author", content: "Alianza F1 — Tara Campos Padilla" },
       { name: "theme-color", content: "#0b1020" },
       {
         property: "og:title",
-        content: "Alianza F1— Software empresarial a medida, automatización e integraciones",
+        content: "Alianza F1 — Agente IA, software empresarial y automatización",
       },
       {
         property: "og:description",
         content:
-          "Plataformas empresariales, automatización con IA e integraciones para pymes y empresas en Latinoamérica. Acompañamiento directo de la ingeniera Tara Campos.",
+          "Conocimiento empresarial que responde con fuentes, acompañado por software, automatización e integraciones a medida.",
       },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Alianza F1" },
@@ -114,12 +114,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:title",
-        content: "Alianza F1— Software empresarial a medida, automatización e integraciones",
+        content: "Alianza F1 — Agente IA, software empresarial y automatización",
       },
       {
         name: "twitter:description",
         content:
-          "Plataformas empresariales, automatización con IA e integraciones para pymes y empresas en Latinoamérica. Acompañamiento directo de la ingeniera Tara Campos.",
+          "Agente de IA empresarial con fuentes y un ecosistema de soluciones tecnológicas a medida.",
       },
       {
         property: "og:image",
