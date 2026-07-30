@@ -14,6 +14,7 @@ import {
   X,
 } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { BLOG_URL, PUBLIC_AGENT_URL } from "@/lib/site-urls";
 
 const WHATSAPP_URL =
   "https://wa.me/573025673434?text=Hola%20Tara%2C%20vi%20la%20p%C3%A1gina%20de%20Alianza%20F1%20y%20quisiera%20conversar%20sobre%20un%20proyecto.";
@@ -237,7 +238,10 @@ export function SiteHeader() {
                     ))}
 
                     <a
-                      href="/agente-ia"
+                      href={PUBLIC_AGENT_URL}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      aria-label="Conocer el agente público de Alianza F1; abre en una pestaña nueva"
                       className="group relative overflow-hidden rounded-xl border border-accent/30 bg-gradient-to-br from-brand/15 via-accent/10 to-transparent p-5"
                     >
                       <div
@@ -296,7 +300,7 @@ export function SiteHeader() {
             Nosotros
           </a>
           <a
-            href="https://blog.tecnologiaydesarrolloweb.com/"
+            href={BLOG_URL}
             target="_blank"
             rel="noreferrer noopener"
             className="rounded-lg px-3 py-2 text-sm text-muted-foreground transition hover:bg-white/5 hover:text-foreground"
@@ -400,7 +404,7 @@ export function SiteHeader() {
               </a>
             ))}
             <a
-              href="https://blog.tecnologiaydesarrolloweb.com/"
+              href={BLOG_URL}
               target="_blank"
               rel="noreferrer noopener"
               className="block rounded-xl px-4 py-3 font-medium text-muted-foreground hover:bg-white/5 hover:text-foreground"
@@ -451,7 +455,7 @@ export function SiteFooter() {
             </li>
             <li>
               <a
-                href="https://ia.tecnologiaydesarrolloweb.com/"
+                href={PUBLIC_AGENT_URL}
                 target="_blank"
                 rel="noreferrer noopener"
                 className="text-muted-foreground hover:text-foreground"

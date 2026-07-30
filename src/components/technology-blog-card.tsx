@@ -1,6 +1,5 @@
 import { Bot, Code2, ExternalLink, Newspaper, Workflow } from "lucide-react";
-
-const BLOG_URL = "https://blog.tecnologiaydesarrolloweb.com/";
+import { BLOG_URL } from "@/lib/site-urls";
 
 const topics = [
   {

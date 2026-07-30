@@ -5,8 +5,7 @@ import {
   LockKeyhole,
   MessageCircleMore,
 } from "lucide-react";
-
-const PUBLIC_AGENT_URL = "https://ia.tecnologiaydesarrolloweb.com/";
+import { PUBLIC_AGENT_URL } from "@/lib/site-urls";
 
 const benefits = [
   {

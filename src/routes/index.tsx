@@ -29,6 +29,7 @@ import { TechnologyBlogCard } from "@/components/technology-blog-card";
 import { ServiceIcon } from "@/components/service-detail-page";
 import { BrandCTA, MarketingLayout } from "@/components/site-chrome";
 import { serviceCatalog } from "@/lib/site-content";
+import { PUBLIC_AGENT_URL } from "@/lib/site-urls";
 
 /* ---------- Scroll reveal ---------- */
 function Reveal({
@@ -446,7 +447,7 @@ function Hero() {
             construimos software empresarial, automatizaciones e integraciones a medida.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <PrimaryCTA href="/agente-ia">Conocer el agente IA</PrimaryCTA>
+            <PrimaryCTA href={PUBLIC_AGENT_URL}>Conocer el agente IA</PrimaryCTA>
             <GhostCTA href="/servicios">Ver todos los servicios</GhostCTA>
           </div>
           <p className="mt-3 text-xs text-muted-foreground">

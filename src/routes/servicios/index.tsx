@@ -3,6 +3,7 @@ import { ArrowRight, Bot, Check, Sparkles } from "lucide-react";
 import { ServiceIcon } from "@/components/service-detail-page";
 import { BrandCTA, MarketingLayout } from "@/components/site-chrome";
 import { serviceCatalog } from "@/lib/site-content";
+import { PUBLIC_AGENT_URL } from "@/lib/site-urls";
 
 export const Route = createFileRoute("/servicios/")({
   head: () => ({
@@ -49,7 +50,10 @@ function ServicesPage() {
 
       <section className="mx-auto max-w-7xl px-5 py-16">
         <a
-          href="/agente-ia"
+          href={PUBLIC_AGENT_URL}
+          target="_blank"
+          rel="noreferrer noopener"
+          aria-label="Conocer el agente público de Alianza F1; abre en una pestaña nueva"
           className="group relative grid overflow-hidden rounded-3xl border border-brand/30 bg-gradient-to-br from-brand/15 via-accent/8 to-transparent lg:grid-cols-[1fr_.9fr]"
         >
           <div

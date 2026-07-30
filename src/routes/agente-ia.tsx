@@ -11,8 +11,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { BrandCTA, MarketingLayout } from "@/components/site-chrome";
-
-const PUBLIC_AGENT_URL = "https://ia.tecnologiaydesarrolloweb.com/";
+import { PUBLIC_AGENT_URL } from "@/lib/site-urls";
 
 export const Route = createFileRoute("/agente-ia")({
   head: () => ({
