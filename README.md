@@ -450,6 +450,56 @@ archivo `.env.example`. Nunca deben almacenarse secretos en variables expuestas 
 
 ## SSR y manejo de errores
 
+### Modelo de renderizado
+
+El proyecto funciona con **renderizado del lado del servidor (SSR)** mediante TanStack Start y
+Nitro. No es una exportación estática SSG ni una SPA pura.
+
+El ciclo de una visita es el siguiente:
+
+1. El navegador solicita una URL.
+2. Nitro recibe la solicitud mediante el servidor generado en `.output/server`.
+3. TanStack Start resuelve la ruta y renderiza su contenido, títulos y metadatos como HTML.
+4. El navegador recibe una página utilizable e indexable.
+5. React hidrata ese HTML y activa los componentes interactivos.
+6. A partir de ese momento, TanStack Router realiza las navegaciones internas en el cliente sin
+   recargar todo el documento.
+
+Por lo tanto, el comportamiento es híbrido: **SSR en la carga inicial y navegación tipo SPA después
+de la hidratación**.
+
+| Modalidad                             | Estado | Explicación                                                               |
+| ------------------------------------- | ------ | ------------------------------------------------------------------------- |
+| SSR                                   | Sí     | Cada acceso directo puede generar HTML desde el servidor Node.            |
+| Hidratación React                     | Sí     | El HTML recibido se vuelve interactivo en el navegador.                   |
+| Navegación cliente                    | Sí     | Las rutas internas cambian sin una recarga completa.                      |
+| SSG                                   | No     | No existe configuración de prerenderizado de todas las rutas en el build. |
+| SPA pura con un único HTML vacío      | No     | El contenido inicial se entrega renderizado desde el servidor.            |
+| Exportación estática para hosting CDN | No     | Producción requiere ejecutar el servidor Nitro.                           |
+
+La configuración que determina este modelo está distribuida entre:
+
+- `vite.config.ts`: activa TanStack Start y configura Nitro con el preset `node-server`;
+- `src/server.ts`: delega cada solicitud a la entrada SSR de TanStack Start;
+- `src/start.ts`: registra el middleware ejecutado durante las solicitudes;
+- `src/routes/__root.tsx`: genera el documento raíz, `HeadContent`, contenido de rutas y scripts de
+  hidratación;
+- `src/router.tsx`: crea el router que continúa la navegación en el navegador;
+- `Dockerfile`: ejecuta `node .output/server/index.mjs` en producción.
+
+La compilación produce dos superficies complementarias:
+
+```text
+.output/
+├── public/   # JavaScript, CSS, imágenes y demás recursos del navegador
+└── server/   # Servidor SSR de Nitro que responde las solicitudes
+```
+
+Los archivos de `.output/public` no sustituyen al servidor. Servir únicamente esa carpeta rompería
+el acceso directo a las rutas y eliminaría el renderizado SSR.
+
+### Manejo de errores SSR
+
 La salida de producción usa el preset `node-server` de Nitro.
 
 - `src/start.ts` registra middleware para convertir errores inesperados en una respuesta HTML 500.
