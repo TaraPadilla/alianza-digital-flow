@@ -24,6 +24,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { EnterpriseAgentCard } from "@/components/enterprise-agent-card";
+import { TechnologyBlogCard } from "@/components/technology-blog-card";
 
 /* ---------- Scroll reveal ---------- */
 function Reveal({
@@ -520,92 +522,14 @@ function BlogBanner() {
   return (
     <section className="mx-auto max-w-7xl px-5 py-12">
       <div className="grid gap-8 lg:grid-cols-2">
-        {/* Blog Banner */}
-        <Reveal className="relative overflow-hidden rounded-2xl border border-brand/30 bg-gradient-to-br from-brand/10 via-accent/5 to-brand/10">
-          <div
-            aria-hidden
-            className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-brand/20 blur-3xl"
-          />
-          <div
-            aria-hidden
-            className="absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-accent/20 blur-3xl"
-          />
-
-          <div className="relative flex flex-col">
-            <img
-              src="/BannerBlog.png"
-              alt="Blog de tecnología y desarrollo web"
-              className="w-full h-auto rounded-t-2xl"
-              style={{ aspectRatio: "700/460" }}
-            />
-            <div className="px-4 sm:px-6 py-4 sm:py-6">
-              <a
-                href="https://blog.tecnologiaydesarrolloweb.com/"
-                target="_blank"
-                rel="noreferrer noopener"
-                className="inline-flex items-center gap-2 rounded-xl btn-primary btn-primary-hover px-5 py-3 text-sm font-semibold shadow-lg"
-              >
-                Visitar el blog
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M5 12h14M13 5l7 7-7 7" />
-                </svg>
-              </a>
-            </div>
-          </div>
+        {/* Technology Blog */}
+        <Reveal className="h-full">
+          <TechnologyBlogCard />
         </Reveal>
 
-        {/* Bot Banner */}
-        <Reveal className="relative overflow-hidden rounded-2xl border border-accent/30 bg-gradient-to-br from-accent/10 via-brand/5 to-accent/10">
-          <div
-            aria-hidden
-            className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-accent/20 blur-3xl"
-          />
-          <div
-            aria-hidden
-            className="absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-brand/20 blur-3xl"
-          />
-
-          <div className="relative flex flex-col">
-            <img
-              src="/BannerBot.png"
-              alt="Bot inteligente de Alianza F1"
-              className="w-full h-auto rounded-t-2xl"
-              style={{ aspectRatio: "700/460" }}
-            />
-            <div className="px-4 sm:px-6 py-4 sm:py-6">
-              <a
-                href="https://ia.tecnologiaydesarrolloweb.com/"
-                target="_blank"
-                rel="noreferrer noopener"
-                className="inline-flex items-center gap-2 rounded-xl btn-primary btn-primary-hover px-5 py-3 text-sm font-semibold shadow-lg"
-              >
-                Prueba ahora
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M5 12h14M13 5l7 7-7 7" />
-                </svg>
-              </a>
-            </div>
-          </div>
+        {/* Enterprise AI Agent */}
+        <Reveal className="h-full">
+          <EnterpriseAgentCard />
         </Reveal>
       </div>
     </section>
