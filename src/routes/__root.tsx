@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
+import { GoogleAnalytics } from "../components/google-analytics";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SUPPORT_EMAIL } from "../lib/site-urls";
@@ -168,6 +169,7 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
+      <GoogleAnalytics />
       <Outlet />
     </QueryClientProvider>
   );

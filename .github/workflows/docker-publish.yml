@@ -36,6 +36,8 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
+          build-args: |
+            VITE_GA_MEASUREMENT_ID=${{ vars.VITE_GA_MEASUREMENT_ID }}
           tags: |
             ghcr.io/tarapadilla/alianza-digital-flow:latest
             ghcr.io/tarapadilla/alianza-digital-flow:${{ github.sha }}

@@ -421,8 +421,7 @@ principal están disponibles sin depender de la hidratación del cliente.
 
 ## Integraciones y enlaces externos
 
-Actualmente no se requieren variables de entorno. Las URLs públicas del agente y del blog están
-centralizadas en `src/lib/site-urls.ts`:
+Las URLs públicas del agente y del blog están centralizadas en `src/lib/site-urls.ts`:
 
 ```ts
 export const PUBLIC_AGENT_URL = "https://agente.tecnologiaydesarrolloweb.com/";
@@ -445,8 +444,63 @@ enlaces externos deben abrirse en una pestaña nueva con `target="_blank"` y
 | Behance           | `src/routes/index.tsx`, metadata institucional                        |
 | Imagen Open Graph | `src/routes/__root.tsx`                                               |
 
-Si estos destinos van a variar por ambiente, deben moverse a variables `VITE_*` documentadas en un
-archivo `.env.example`. Nunca deben almacenarse secretos en variables expuestas al cliente.
+Si estos destinos cambian, deben actualizarse en el módulo central en lugar de repetirse dentro de
+los componentes.
+
+### Google Analytics 4
+
+La medición utiliza el mismo flujo GA4 del blog, con el ID `G-FN337E83YN`. El ID no está escrito
+directamente en los componentes: el pipeline lo recibe desde la variable pública de GitHub Actions
+`VITE_GA_MEASUREMENT_ID` y Vite lo incorpora durante la compilación de la imagen.
+
+`src/components/google-analytics.tsx`:
+
+- se ejecuta en el navegador después de la hidratación SSR;
+- carga `gtag.js` y configura GA4 una sola vez con `send_page_view: false`;
+- registra manualmente el `page_view` inicial;
+- escucha `onRendered` de TanStack Router para medir cambios de ruta;
+- envía `page_title` y `page_location`;
+- deduplica por ID, pathname y query string;
+- ignora cambios que solo afectan el fragmento `#hash`;
+- no carga Analytics si la variable está ausente o no tiene formato `G-*`.
+
+Para evitar eventos duplicados, en el flujo web de GA4 debe desactivarse:
+
+```text
+Medición mejorada
+→ Vistas de página
+→ Cambios de página basados en eventos del historial
+```
+
+#### Docker y GitHub Actions
+
+Vite incorpora las variables `VITE_*` durante `npm run build`. Definir
+`VITE_GA_MEASUREMENT_ID` únicamente al arrancar un contenedor ya compilado no modifica el bundle.
+
+El `Dockerfile` recibe la variable como argumento de construcción. El workflow
+`.github/workflows/docker-publish.yml` la obtiene de una variable de GitHub Actions:
+
+```text
+Settings
+→ Secrets and variables
+→ Actions
+→ Variables
+→ VITE_GA_MEASUREMENT_ID = G-FN337E83YN
+```
+
+No necesita almacenarse como secreto. El pipeline incorpora el valor al construir la imagen y el
+servidor de OCI solo debe descargar y ejecutar esa imagen.
+
+No debe agregarse esta variable al `.env` del servidor ni al `docker-compose` de producción. El
+servidor no construye el frontend: descarga una imagen cuyo bundle ya contiene la configuración.
+Cambiar una variable en tiempo de ejecución no puede modificar un valor `VITE_*` ya compilado.
+
+Resumen operativo:
+
+1. GitHub Actions conserva `VITE_GA_MEASUREMENT_ID=G-FN337E83YN` como variable del repositorio.
+2. El workflow la entrega al `Dockerfile` como argumento de construcción.
+3. Vite la incorpora al bundle durante `npm run build`.
+4. OCI descarga y ejecuta la imagen sin necesitar esa variable en el servidor.
 
 ## SSR y manejo de errores
 
@@ -631,7 +685,8 @@ Antes de desplegar:
 4. comprobar el agente, blog, WhatsApp y correo;
 5. actualizar canonical e imagen Open Graph si cambia la URL pública;
 6. verificar el comportamiento SSR en rutas internas;
-7. conservar los logs del servidor para diagnóstico.
+7. comprobar un solo `page_view` inicial y uno por navegación interna en GA4 DebugView;
+8. conservar los logs del servidor para diagnóstico.
 
 Los directorios `.output`, `.nitro`, `.vinxi` y `.tanstack` son generados y no deben versionarse.
 
