@@ -14,7 +14,7 @@ import {
   X,
 } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { BLOG_URL, PUBLIC_AGENT_URL } from "@/lib/site-urls";
+import { BLOG_URL, PUBLIC_AGENT_URL, SUPPORT_EMAIL, SUPPORT_EMAIL_URL } from "@/lib/site-urls";
 
 const WHATSAPP_URL =
   "https://wa.me/573025673434?text=Hola%20Tara%2C%20vi%20la%20p%C3%A1gina%20de%20Alianza%20F1%20y%20quisiera%20conversar%20sobre%20un%20proyecto.";
@@ -259,7 +259,7 @@ export function SiteHeader() {
                         Consulta documentos autorizados y comprueba cada respuesta con sus fuentes.
                       </p>
                       <span className="relative mt-5 inline-flex items-center gap-2 text-xs font-semibold text-foreground">
-                        Conocer el agente
+                        Probar agente público
                         <Arrow />
                       </span>
                     </a>
@@ -490,8 +490,8 @@ export function SiteFooter() {
           </h2>
           <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
             <li>
-              <a href="mailto:tarapadilla90@gmail.com" className="hover:text-foreground">
-                tarapadilla90@gmail.com
+              <a href={SUPPORT_EMAIL_URL} className="hover:text-foreground">
+                {SUPPORT_EMAIL}
               </a>
             </li>
             <li>

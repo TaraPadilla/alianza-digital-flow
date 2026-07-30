@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { SUPPORT_EMAIL } from "../lib/site-urls";
 
 function NotFoundComponent() {
   return (
@@ -80,7 +81,7 @@ const orgJsonLd = {
     "Alianza F1 desarrolla un agente de IA empresarial con fuentes y diseña software, automatizaciones e integraciones a medida para empresas en Latinoamérica.",
   areaServed: "Latinoamérica",
   founder: { "@type": "Person", name: "Tara Campos Padilla", jobTitle: "Ingeniera de software" },
-  email: "tarapadilla90@gmail.com",
+  email: SUPPORT_EMAIL,
   telephone: "+57 302 567 3434",
   address: { "@type": "PostalAddress", addressCountry: "CO" },
   sameAs: ["https://www.behance.net/IngTaraCampos"],

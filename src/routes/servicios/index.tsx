@@ -81,7 +81,7 @@ function ServicesPage() {
               ))}
             </ul>
             <span className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-brand transition group-hover:text-foreground">
-              Conocer el agente
+              Probar agente público
               <ArrowRight className="h-4 w-4" />
             </span>
           </div>

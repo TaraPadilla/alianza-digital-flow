@@ -427,6 +427,8 @@ centralizadas en `src/lib/site-urls.ts`:
 ```ts
 export const PUBLIC_AGENT_URL = "https://agente.tecnologiaydesarrolloweb.com/";
 export const BLOG_URL = "https://blog.tecnologiadesarrolloweb.com/";
+export const SUPPORT_EMAIL = "soporte@tecnologiaydesarrolloweb.com";
+export const SUPPORT_EMAIL_URL = `mailto:${SUPPORT_EMAIL}`;
 ```
 
 Los componentes deben importar estas constantes en lugar de repetir las direcciones. De esta forma,
@@ -434,14 +436,14 @@ cualquier cambio de dominio se realiza una sola vez y todos los CTA permanecen c
 enlaces externos deben abrirse en una pestaña nueva con `target="_blank"` y
 `rel="noopener noreferrer"`.
 
-| Destino           | Ubicación principal                                      |
-| ----------------- | -------------------------------------------------------- |
-| Agente público    | `src/lib/site-urls.ts` mediante `PUBLIC_AGENT_URL`       |
-| Blog              | `src/lib/site-urls.ts` mediante `BLOG_URL`               |
-| WhatsApp          | `src/components/site-chrome.tsx`, `src/routes/index.tsx` |
-| Correo            | `src/components/site-chrome.tsx`, `src/routes/index.tsx` |
-| Behance           | `src/routes/index.tsx`, metadata institucional           |
-| Imagen Open Graph | `src/routes/__root.tsx`                                  |
+| Destino           | Ubicación principal                                                   |
+| ----------------- | --------------------------------------------------------------------- |
+| Agente público    | `src/lib/site-urls.ts` mediante `PUBLIC_AGENT_URL`                    |
+| Blog              | `src/lib/site-urls.ts` mediante `BLOG_URL`                            |
+| Correo de soporte | `src/lib/site-urls.ts` mediante `SUPPORT_EMAIL` y `SUPPORT_EMAIL_URL` |
+| WhatsApp          | `src/components/site-chrome.tsx`, `src/routes/index.tsx`              |
+| Behance           | `src/routes/index.tsx`, metadata institucional                        |
+| Imagen Open Graph | `src/routes/__root.tsx`                                               |
 
 Si estos destinos van a variar por ambiente, deben moverse a variables `VITE_*` documentadas en un
 archivo `.env.example`. Nunca deben almacenarse secretos en variables expuestas al cliente.

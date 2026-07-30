@@ -29,7 +29,7 @@ import { TechnologyBlogCard } from "@/components/technology-blog-card";
 import { ServiceIcon } from "@/components/service-detail-page";
 import { BrandCTA, MarketingLayout } from "@/components/site-chrome";
 import { serviceCatalog } from "@/lib/site-content";
-import { PUBLIC_AGENT_URL } from "@/lib/site-urls";
+import { PUBLIC_AGENT_URL, SUPPORT_EMAIL, SUPPORT_EMAIL_URL } from "@/lib/site-urls";
 
 /* ---------- Scroll reveal ---------- */
 function Reveal({
@@ -447,7 +447,7 @@ function Hero() {
             construimos software empresarial, automatizaciones e integraciones a medida.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <PrimaryCTA href={PUBLIC_AGENT_URL}>Conocer el agente IA</PrimaryCTA>
+            <PrimaryCTA href={PUBLIC_AGENT_URL}>Probar el agente IA</PrimaryCTA>
             <GhostCTA href="/servicios">Ver todos los servicios</GhostCTA>
           </div>
           <p className="mt-3 text-xs text-muted-foreground">
@@ -1216,7 +1216,7 @@ function CTAContact() {
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <PrimaryCTA>Escribir por WhatsApp</PrimaryCTA>
-            <GhostCTA href="mailto:tarapadilla90@gmail.com">tarapadilla90@gmail.com</GhostCTA>
+            <GhostCTA href={SUPPORT_EMAIL_URL}>{SUPPORT_EMAIL}</GhostCTA>
           </div>
         </div>
         <ContactForm />
@@ -1328,11 +1328,8 @@ function Footer() {
           </h3>
           <ul className="mt-4 space-y-2 text-sm">
             <li>
-              <a
-                className="hover:text-foreground text-muted-foreground"
-                href="mailto:tarapadilla90@gmail.com"
-              >
-                tarapadilla90@gmail.com
+              <a className="hover:text-foreground text-muted-foreground" href={SUPPORT_EMAIL_URL}>
+                {SUPPORT_EMAIL}
               </a>
             </li>
             <li>
