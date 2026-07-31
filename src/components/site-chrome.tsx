@@ -96,7 +96,7 @@ function Arrow() {
 }
 
 export function BrandCTA({
-  href = WHATSAPP_URL,
+  href = "/contacto",
   children,
   secondary = false,
   className = "",
@@ -300,6 +300,12 @@ export function SiteHeader() {
             Nosotros
           </a>
           <a
+            href="/contacto"
+            className="rounded-lg px-3 py-2 text-sm text-muted-foreground transition hover:bg-white/5 hover:text-foreground"
+          >
+            Contacto
+          </a>
+          <a
             href={BLOG_URL}
             target="_blank"
             rel="noreferrer noopener"
@@ -311,13 +317,11 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-2">
           <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noreferrer noopener"
-            className="hidden items-center gap-2 rounded-xl btn-whatsapp btn-whatsapp-hover px-4 py-2 text-sm font-semibold sm:inline-flex"
+            href="/contacto"
+            className="magnetic magnetic-shine hidden items-center gap-2 rounded-xl btn-primary btn-primary-hover px-4 py-2 text-sm font-semibold sm:inline-flex"
           >
-            <img src="/whatsapp.svg" alt="" className="h-4 w-4" />
-            Hablemos
+            Pedir información
+            <Arrow />
           </a>
           <button
             type="button"
@@ -394,6 +398,7 @@ export function SiteHeader() {
               ["/casos", "Casos"],
               ["/metodologia", "Metodología"],
               ["/nosotros", "Nosotros"],
+              ["/contacto", "Contacto"],
             ].map(([href, label]) => (
               <a
                 key={href}
@@ -475,6 +480,7 @@ export function SiteFooter() {
               ["/casos", "Casos"],
               ["/metodologia", "Metodología"],
               ["/nosotros", "Nosotros"],
+              ["/contacto", "Contacto"],
             ].map(([href, label]) => (
               <li key={href}>
                 <a href={href} className="text-muted-foreground hover:text-foreground">

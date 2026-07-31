@@ -4,7 +4,6 @@ import {
   useEffect,
   useRef,
   useState,
-  type FormEvent,
   type ReactNode,
   type CSSProperties,
 } from "react";
@@ -14,16 +13,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { ContactForm } from "@/components/contact-form";
 import { EnterpriseAgentCard } from "@/components/enterprise-agent-card";
 import { TechnologyBlogCard } from "@/components/technology-blog-card";
 import { ServiceIcon } from "@/components/service-detail-page";
@@ -162,6 +152,7 @@ function Header() {
     { href: "#metodologia", label: "Metodología" },
     { href: "#sobre", label: "Sobre Tara" },
     { href: "#faq", label: "Preguntas" },
+    { href: "/contacto", label: "Contacto" },
   ];
 
   useEffect(() => {
@@ -227,13 +218,10 @@ function Header() {
             </svg>
           </button>
           <a
-            href={waUrl()}
-            target="_blank"
-            rel="noreferrer"
-            className="hidden sm:inline-flex items-center gap-2 rounded-xl btn-whatsapp btn-whatsapp-hover px-4 py-2 text-base font-semibold"
+            href="/contacto"
+            className="magnetic magnetic-shine hidden sm:inline-flex items-center gap-2 rounded-xl btn-primary btn-primary-hover px-4 py-2 text-base font-semibold"
           >
-            <img src="/whatsapp.svg" alt="WhatsApp" className="h-5 w-5" />
-            Hablemos
+            Pedir información
           </a>
         </div>
       </div>
@@ -251,13 +239,10 @@ function Header() {
               </a>
             ))}
             <a
-              href={waUrl()}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-2 rounded-lg btn-whatsapp btn-whatsapp-hover px-3 py-2 text-center text-sm font-semibold"
+              href="/contacto"
+              className="mt-2 rounded-lg btn-primary btn-primary-hover px-3 py-2 text-center text-sm font-semibold"
             >
-              <img src="/whatsapp.svg" alt="WhatsApp" className="h-4 w-4 inline mr-1" />
-              Hablemos
+              Pedir información
             </a>
           </nav>
         </div>
@@ -1029,174 +1014,6 @@ function About() {
         </div>
       </div>
     </section>
-  );
-}
-
-/* ---------- Contact form ---------- */
-
-type FormData = {
-  nombre: string;
-  empresa: string;
-  contacto: string;
-  tipo: string;
-  descripcion: string;
-};
-type Errors = Partial<Record<keyof FormData, string>>;
-
-function ContactForm() {
-  const [data, setData] = useState<FormData>({
-    nombre: "",
-    empresa: "",
-    contacto: "",
-    tipo: "",
-    descripcion: "",
-  });
-  const [errors, setErrors] = useState<Errors>({});
-
-  function update<K extends keyof FormData>(k: K, v: string) {
-    setData((d) => ({ ...d, [k]: v }));
-    if (errors[k]) setErrors((e) => ({ ...e, [k]: undefined }));
-  }
-
-  function validate(): boolean {
-    const e: Errors = {};
-    if (!data.nombre.trim() || data.nombre.trim().length < 2) e.nombre = "Cuéntanos tu nombre.";
-    if (data.nombre.length > 100) e.nombre = "Máximo 100 caracteres.";
-    if (!data.contacto.trim()) e.contacto = "Déjanos un WhatsApp o correo.";
-    else if (data.contacto.length > 120) e.contacto = "Máximo 120 caracteres.";
-    if (!data.tipo) e.tipo = "Elige una opción.";
-    if (!data.descripcion.trim() || data.descripcion.trim().length < 10)
-      e.descripcion = "Cuéntanos un poco más (mínimo 10 caracteres).";
-    if (data.descripcion.length > 1000) e.descripcion = "Máximo 1000 caracteres.";
-    if (data.empresa.length > 120) e.empresa = "Máximo 120 caracteres.";
-    setErrors(e);
-    return Object.keys(e).length === 0;
-  }
-
-  function onSubmit(ev: FormEvent<HTMLFormElement>) {
-    ev.preventDefault();
-    if (!validate()) return;
-    const msg =
-      `Hola Tara, soy ${data.nombre}` +
-      (data.empresa ? ` (${data.empresa})` : "") +
-      `. Vi la página de Alianza F1 y me interesa: ${data.tipo}.\n\n` +
-      `Descripción: ${data.descripcion}\n\n` +
-      `Mi contacto: ${data.contacto}`;
-    window.open(waUrl(msg), "_blank", "noopener,noreferrer");
-  }
-
-  return (
-    <form onSubmit={onSubmit} noValidate className="card-elevated p-6 sm:p-8">
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div>
-          <Label htmlFor="nombre">Nombre</Label>
-          <Input
-            id="nombre"
-            value={data.nombre}
-            onChange={(e) => update("nombre", e.target.value)}
-            maxLength={100}
-            aria-invalid={!!errors.nombre}
-            className="mt-1.5 bg-white/[0.03]"
-            placeholder="Tu nombre"
-          />
-          {errors.nombre && <p className="mt-1 text-xs text-destructive">{errors.nombre}</p>}
-        </div>
-        <div>
-          <Label htmlFor="empresa">
-            Empresa <span className="text-muted-foreground">(opcional)</span>
-          </Label>
-          <Input
-            id="empresa"
-            value={data.empresa}
-            onChange={(e) => update("empresa", e.target.value)}
-            maxLength={120}
-            className="mt-1.5 bg-white/[0.03]"
-            placeholder="Nombre de tu empresa"
-          />
-          {errors.empresa && <p className="mt-1 text-xs text-destructive">{errors.empresa}</p>}
-        </div>
-        <div>
-          <Label htmlFor="contacto">WhatsApp o correo</Label>
-          <Input
-            id="contacto"
-            value={data.contacto}
-            onChange={(e) => update("contacto", e.target.value)}
-            maxLength={120}
-            aria-invalid={!!errors.contacto}
-            className="mt-1.5 bg-white/[0.03]"
-            placeholder="+57 300 000 0000 o tu@correo.com"
-          />
-          {errors.contacto && <p className="mt-1 text-xs text-destructive">{errors.contacto}</p>}
-        </div>
-        <div>
-          <Label htmlFor="tipo">Tipo de solución</Label>
-          <Select value={data.tipo} onValueChange={(v) => update("tipo", v)}>
-            <SelectTrigger
-              id="tipo"
-              aria-invalid={!!errors.tipo}
-              className="mt-1.5 bg-white/[0.03]"
-            >
-              <SelectValue placeholder="Selecciona una opción" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="Plataforma a medida">Plataforma a medida</SelectItem>
-              <SelectItem value="Automatización / IA">Automatización / IA</SelectItem>
-              <SelectItem value="Integraciones">Integraciones</SelectItem>
-              <SelectItem value="Modernización o soporte">Modernización o soporte</SelectItem>
-              <SelectItem value="Aún no lo tengo claro">Aún no lo tengo claro</SelectItem>
-            </SelectContent>
-          </Select>
-          {errors.tipo && <p className="mt-1 text-xs text-destructive">{errors.tipo}</p>}
-        </div>
-        <div className="sm:col-span-2">
-          <Label htmlFor="descripcion">Cuéntanos brevemente</Label>
-          <Textarea
-            id="descripcion"
-            value={data.descripcion}
-            onChange={(e) => update("descripcion", e.target.value)}
-            maxLength={1000}
-            aria-invalid={!!errors.descripcion}
-            rows={4}
-            className="mt-1.5 bg-white/[0.03]"
-            placeholder="¿Qué proceso te gustaría mejorar o qué necesitas construir?"
-          />
-          <div className="mt-1 flex items-center justify-between">
-            {errors.descripcion ? (
-              <p className="text-xs text-destructive">{errors.descripcion}</p>
-            ) : (
-              <span />
-            )}
-            <span className="text-[11px] text-muted-foreground">
-              {data.descripcion.length}/1000
-            </span>
-          </div>
-        </div>
-      </div>
-      <div className="mt-6 flex flex-wrap items-center gap-3">
-        <button
-          type="submit"
-          className="inline-flex items-center gap-2 rounded-xl btn-whatsapp btn-whatsapp-hover px-5 py-3 text-sm font-semibold"
-        >
-          <img src="/whatsapp.svg" alt="WhatsApp" className="h-4 w-4" />
-          Enviar por WhatsApp
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M5 12h14M13 5l7 7-7 7" />
-          </svg>
-        </button>
-        <span className="text-xs text-muted-foreground">
-          Se abrirá una conversación con la información ingresada.
-        </span>
-      </div>
-    </form>
   );
 }
 

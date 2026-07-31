@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AgenteIaRouteImport } from './routes/agente-ia'
 import { Route as CasosRouteImport } from './routes/casos'
+import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as MetodologiaRouteImport } from './routes/metodologia'
 import { Route as NosotrosRouteImport } from './routes/nosotros'
 import { Route as ServiciosIndexRouteImport } from './routes/servicios/index'
@@ -35,6 +36,11 @@ const AgenteIaRoute = AgenteIaRouteImport.update({
 const CasosRoute = CasosRouteImport.update({
   id: '/casos',
   path: '/casos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactoRoute = ContactoRouteImport.update({
+  id: '/contacto',
+  path: '/contacto',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MetodologiaRoute = MetodologiaRouteImport.update({
@@ -91,6 +97,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agente-ia': typeof AgenteIaRoute
   '/casos': typeof CasosRoute
+  '/contacto': typeof ContactoRoute
   '/metodologia': typeof MetodologiaRoute
   '/nosotros': typeof NosotrosRoute
   '/servicios/automatizacion-ia': typeof ServiciosAutomatizacionIaRoute
@@ -105,6 +112,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/agente-ia': typeof AgenteIaRoute
   '/casos': typeof CasosRoute
+  '/contacto': typeof ContactoRoute
   '/metodologia': typeof MetodologiaRoute
   '/nosotros': typeof NosotrosRoute
   '/servicios/automatizacion-ia': typeof ServiciosAutomatizacionIaRoute
@@ -120,6 +128,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/agente-ia': typeof AgenteIaRoute
   '/casos': typeof CasosRoute
+  '/contacto': typeof ContactoRoute
   '/metodologia': typeof MetodologiaRoute
   '/nosotros': typeof NosotrosRoute
   '/servicios/automatizacion-ia': typeof ServiciosAutomatizacionIaRoute
@@ -136,6 +145,7 @@ export interface FileRouteTypes {
     | '/'
     | '/agente-ia'
     | '/casos'
+    | '/contacto'
     | '/metodologia'
     | '/nosotros'
     | '/servicios/automatizacion-ia'
@@ -150,6 +160,7 @@ export interface FileRouteTypes {
     | '/'
     | '/agente-ia'
     | '/casos'
+    | '/contacto'
     | '/metodologia'
     | '/nosotros'
     | '/servicios/automatizacion-ia'
@@ -164,6 +175,7 @@ export interface FileRouteTypes {
     | '/'
     | '/agente-ia'
     | '/casos'
+    | '/contacto'
     | '/metodologia'
     | '/nosotros'
     | '/servicios/automatizacion-ia'
@@ -179,6 +191,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AgenteIaRoute: typeof AgenteIaRoute
   CasosRoute: typeof CasosRoute
+  ContactoRoute: typeof ContactoRoute
   MetodologiaRoute: typeof MetodologiaRoute
   NosotrosRoute: typeof NosotrosRoute
   ServiciosAutomatizacionIaRoute: typeof ServiciosAutomatizacionIaRoute
@@ -211,6 +224,13 @@ declare module '@tanstack/react-router' {
       path: '/casos'
       fullPath: '/casos'
       preLoaderRoute: typeof CasosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacto': {
+      id: '/contacto'
+      path: '/contacto'
+      fullPath: '/contacto'
+      preLoaderRoute: typeof ContactoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/metodologia': {
@@ -283,6 +303,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgenteIaRoute: AgenteIaRoute,
   CasosRoute: CasosRoute,
+  ContactoRoute: ContactoRoute,
   MetodologiaRoute: MetodologiaRoute,
   NosotrosRoute: NosotrosRoute,
   ServiciosAutomatizacionIaRoute: ServiciosAutomatizacionIaRoute,
